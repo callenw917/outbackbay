@@ -33,3 +33,9 @@ export default function SpellPage() {
     </>
   );
 }
+
+/*
+    While on 'all' we'll default to smaller cards in a column format. The description of the spell will be collapsed but expandable.
+    If clicking on a specific spell level, we'll switch to a single column view with much more detail per spell, not requiring a button to expand the description.
+
+*/
