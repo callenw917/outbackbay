@@ -1,13 +1,14 @@
 import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
+import 'public/global.css';
+import { Button } from '@mantine/core';
 
 export default function HomePage() {
   return (
     <>
-      <SpellLevelSelector/>
-      <Welcome />
-      <ColorSchemeToggle />
+      <div className='mainArea'>
+        <Welcome />
+        <Button component="a" href="/spells" variant='outline'>Spell Library</Button>
+      </div>
     </>
   );
 }
