@@ -17,7 +17,7 @@ class Spell {
 
     constructor(name: string, description: string, level: number, school: string, target: target, castTime: SpellTime,
         isRitual: boolean, isConcentration: boolean, source: string, range: SpellRange, components: string, duration: SpellTime,
-        damageType: string;)
+        damageType: string)
     {
         this.name = name;
         this.description = description;
