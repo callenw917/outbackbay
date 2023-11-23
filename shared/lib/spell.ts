@@ -1,6 +1,6 @@
 const SPELL_SCHOOLS = ["Abjuration", "Necromancy", "Illusion", "Conjuration", "Evocation", "Divination", "Enchantment", "Transmutation"]
 
-class Spell {
+export class Spell {
     name: string;
     description: string;
     level: number;
@@ -35,7 +35,7 @@ class Spell {
     }
 };
 
-class SpellTime 
+export class SpellTime 
 {
     amount: number;
     unit: timeUnit;
@@ -47,7 +47,7 @@ class SpellTime
     }
 }
 
-class SpellRange
+export class SpellRange
 {
     amount: number;
     unit: rangeUnit;
@@ -59,14 +59,14 @@ class SpellRange
     }
 }
 
-enum target {
+export enum target {
     self,
     single,
     multi,
     aoe
 };
 
-enum timeUnit
+export enum timeUnit
 {
     second,
     minute,
@@ -80,7 +80,7 @@ enum timeUnit
     reaction
 };
 
-enum rangeUnit
+export enum rangeUnit
 {
     feet,
     miles,
