@@ -23,8 +23,8 @@ export default function SpellPage() {
             <SpellCardCustom name="Prestidigitation"/>
           </SpellGroup>
           <SpellGroup spellLevel='Level 1'>
-          <SpellCardCustom name="Shield"/>
-          <SpellCardCustom name="Chromatic Orb"/>
+            <SpellCardCustom name="Shield"/>
+            <SpellCardCustom name="Chromatic Orb"/>
           </SpellGroup>
           <SpellGroup spellLevel='Level 2'>
             <SpellCardCustom name="Web"/>
