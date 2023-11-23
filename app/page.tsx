@@ -1,11 +1,14 @@
 import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import 'public/global.css';
+import { Button } from '@mantine/core';
 
 export default function HomePage() {
   return (
     <>
-      <Welcome />
-      <ColorSchemeToggle />
+      <div className='mainArea'>
+        <Welcome />
+        <Button component="a" href="/spells" variant='outline'>Spell Library</Button>
+      </div>
     </>
   );
 }
