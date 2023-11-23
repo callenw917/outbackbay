@@ -1,3 +1,5 @@
+'use client'
+
 import { Welcome } from '@/components/Welcome/Welcome';
 import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
 import { SpellCard } from '@/components/SpellCard/SpellCard';
@@ -5,10 +7,25 @@ import 'public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
 import { Spell, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
 import { SpellCardCustom } from '@/components/SpellCard/SpellCardCustom';
+import { useState } from 'react';
+import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
 
 export default function SpellPage() {
 
   var spellList:Spell[] = createTestSpells();
+  var selectedSpell:Spell;
+
+  const [detailedCardVisible, setDetailedCardVisible] = useState(false);
+
+  function closeDetailedViewHandler() { 
+    setDetailedCardVisible(false); 
+  }
+
+  function openDetailedViewHandler(selectedSpell: Spell)
+  {
+    selectedSpell = selectedSpell;
+    setDetailedCardVisible(true);
+  }
 
   return (
     <>
@@ -18,7 +35,7 @@ export default function SpellPage() {
         <div className='spellCardArea'>
           <SpellGroup spellLevel='Cantrips'>
             {spellList.map(spell => (
-              <SpellCard spell={spell} />
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
             ))}
             <SpellCardCustom name="Prestidigitation"/>
           </SpellGroup>
@@ -37,6 +54,7 @@ export default function SpellPage() {
           </SpellGroup> 
         </div>
       </div>
+      {detailedCardVisible && <InactiveArea onClick={closeDetailedViewHandler}/>}
     </>
   );
 }
