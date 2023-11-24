@@ -7,25 +7,39 @@ import 'public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
 import { Spell, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
 import { SpellCardCustom } from '@/components/SpellCard/SpellCardCustom';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
+import prisma from '@/lib/prisma';
+
+async function getSpells()
+{ 
+  //Call API here
+  var spellJson = await fetch('/api/get-spells', {
+    method: "GET"
+  });
+
+  return spellJson.json();
+};
+
+const spellPromise = getSpells();
 
 export default function SpellPage() {
-
-  var spellList:Spell[] = createTestSpells();
-  var selectedSpell:Spell;
 
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
 
   function closeDetailedViewHandler() { 
+    console.log("Closing Detailed Card");
     setDetailedCardVisible(false); 
   }
 
   function openDetailedViewHandler(selectedSpell: Spell)
   {
+    console.log("Opening Detailed Card");
     selectedSpell = selectedSpell;
     setDetailedCardVisible(true);
   }
+
+  var spells: Spell[] = use(spellPromise);
 
   return (
     <>
@@ -33,24 +47,55 @@ export default function SpellPage() {
         <Welcome />
         <SpellLevelSelector/>
         <div className='spellCardArea'>
-          <SpellGroup spellLevel='Cantrips'>
-            {spellList.map(spell => (
+          <SpellGroup spellLevel='Cantrips'>  
+            {getSortedSpells(0).map((spell: any) => (
               <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
             ))}
-            <SpellCardCustom name="Prestidigitation"/>
           </SpellGroup>
           <SpellGroup spellLevel='Level 1'>
-            <SpellCardCustom name="Shield"/>
-            <SpellCardCustom name="Chromatic Orb"/>
+            {getSortedSpells(1).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 2'>
-            <SpellCardCustom name="Web"/>
+            {getSortedSpells(2).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 3'>
-            <SpellCardCustom name="Fireball"/>
+            {getSortedSpells(3).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 4'>
-            <SpellCardCustom name="Hold Monster"/>
+            {getSortedSpells(4).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
+          </SpellGroup>
+          <SpellGroup spellLevel='Level 5'>
+            {getSortedSpells(5).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
+          </SpellGroup> 
+          <SpellGroup spellLevel='Level 6'>
+            {getSortedSpells(6).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
+          </SpellGroup> 
+          <SpellGroup spellLevel='Level 7'>
+            {getSortedSpells(7).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
+          </SpellGroup> 
+          <SpellGroup spellLevel='Level 8'>
+            {getSortedSpells(8).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
+          </SpellGroup> 
+          <SpellGroup spellLevel='Level 9'>
+            {getSortedSpells(9).map((spell: any) => (
+              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+            ))}
           </SpellGroup> 
         </div>
       </div>
@@ -59,47 +104,18 @@ export default function SpellPage() {
   );
 }
 
-function createTestSpells(): Spell[]
-{
-  var spellList:Spell[] = [];
+function getSortedSpells(level: number): Spell[] {
+  var spells: Spell[] = use(spellPromise);
+  var sortedSpells: Spell[] = [];
 
-  var burningHands:Spell = new Spell(
-    "Burning Hands",
-    "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one." +
-    "The fire ignites any flammable objects in the area that aren't being worn or carried.",
-    0,
-    "Evocation",
-    target.single,
-    {amount: 1, unit: timeUnit.action},
-    false,
-    false,
-    "phb",
-    {amount: 15, unit: rangeUnit.feet},
-    "V, S",
-    {amount: 1, unit: timeUnit.action},
-    "fire"
-  )
-
-  var coneOfCold:Spell = new Spell(
-    "Cone of Cold",
-    "Open your hands and out comes some cold. Burr!",
-    0,
-    "Evocation",
-    target.single,
-    {amount: 1, unit: timeUnit.action},
-    false,
-    false,
-    "phb",
-    {amount: 15, unit: rangeUnit.feet},
-    "V, S",
-    {amount: 1, unit: timeUnit.action},
-    "fire"
-  )
-
-  spellList.push(burningHands);
-  spellList.push(coneOfCold);
-
-  return spellList;
+  spells.forEach(spell => {
+    if (spell.level == level)
+    {
+      sortedSpells.push(spell);
+    }  
+  });
+  
+  return sortedSpells;
 }
 
 /*

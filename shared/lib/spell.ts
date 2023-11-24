@@ -4,20 +4,20 @@ export class Spell {
     name: string;
     description: string;
     level: number;
-    school: string;
-    isRitual: boolean;
-    isConcentration: boolean;
-    source: string;
-    target: target;
-    castTime: SpellTime;
-    range: SpellRange;
-    components: string;
-    duration: SpellTime;
-    damageType: string;
+    school?: string;
+    isRitual?: boolean;
+    isConcentration?: boolean;
+    source?: string;
+    target?: target;
+    castTime?: SpellTime;
+    range?: SpellRange;
+    components?: string;
+    duration?: SpellTime;
+    damageType?: string;
 
-    constructor(name: string, description: string, level: number, school: string, target: target, castTime: SpellTime,
-        isRitual: boolean, isConcentration: boolean, source: string, range: SpellRange, components: string, duration: SpellTime,
-        damageType: string)
+    constructor(name: string, description: string, level: number, school?: string, target?: target, castTime?: SpellTime,
+        isRitual?: boolean, isConcentration?: boolean, source?: string, range?: SpellRange, components?: string, duration?: SpellTime,
+        damageType?: string)
     {
         this.name = name;
         this.description = description;

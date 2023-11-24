@@ -22,8 +22,10 @@
     "@mantine/core": "7.2.2",
     "@mantine/hooks": "7.2.2",
     "@next/bundle-analyzer": "^14.0.1",
+    "@prisma/client": "^5.6.0",
     "@tabler/icons-react": "^2.40.0",
     "@vercel/postgres": "^0.5.1",
+    "csv-parse": "^5.5.2",
     "next": "^14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -41,7 +43,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.7",
-    "@types/node": "^20.8.10",
+    "@types/node": "^20.10.0",
     "@types/react": "18.2.34",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
@@ -62,12 +64,17 @@
     "postcss-preset-mantine": "1.11.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.0.3",
+    "prisma": "^5.6.0",
     "storybook": "^7.5.2",
     "storybook-dark-mode": "^3.0.1",
     "stylelint": "^15.11.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "ts-jest": "^29.1.1",
-    "typescript": "5.2.2"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "packageManager": "yarn@4.0.1"
 }
