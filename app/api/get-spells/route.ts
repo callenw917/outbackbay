@@ -11,5 +11,5 @@ export async function GET(request: Request)
         spells.push(new Spell(rawSpell.name, rawSpell.details, rawSpell.level));
     });
 
-    return Response.json(spells);
+    return Response.json({spells});
 }

@@ -16,7 +16,7 @@ async function getSpells()
   //Call API here
   
   var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
-    method: "GET"
+    method: "GET",
   });
 
   return spellJson.json();
