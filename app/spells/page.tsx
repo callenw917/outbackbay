@@ -107,7 +107,7 @@ export default function SpellPage() {
 }
 
 function getSortedSpells(level: number): Spell[] {
-  var spells: Spell[] = use(spellPromise);
+  const spells: Spell[] = use(spellPromise) as Spell[];
   var sortedSpells: Spell[] = [];
 
   spells.forEach(spell => {
