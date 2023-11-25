@@ -19,7 +19,8 @@ async function getSpells()
     method: "GET",
      headers: {
        Accept: 'application/json'
-     }
+     },
+     cache: 'no-store'
   });
 
   console.log(spellJson);
