@@ -15,14 +15,12 @@ async function getSpells()
 { 
   //Call API here
   
-  // var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
-  //   method: "GET",
-  //   headers: {Accept: 'application/json'}
-  // });
+  var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
+    method: "GET",
+    headers: {Accept: 'application/json'}
+  });
 
-  // return spellJson.json();
-  var spells: Spell[] = [];
-  return spells;
+  return spellJson.json();
 };
 
 const spellPromise = getSpells();
