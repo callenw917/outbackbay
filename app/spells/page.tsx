@@ -14,13 +14,16 @@ import prisma from '@/lib/prisma';
 async function getSpells()
 { 
   //Call API here
-  var spellJson = await fetch('https://www.outbackbay.com/api/get-spells', {
+  
+  var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
     method: "GET",
      headers: {
        Accept: 'application/json'
      },
      cache: 'no-store'
   });
+
+  console.log(spellJson);
 
   return spellJson.json();
 };
@@ -127,5 +130,4 @@ function getSortedSpells(spells: Spell[], level: number): Spell[] {
 /*
     While on 'all' we'll default to smaller cards in a column format. The description of the spell will be collapsed but expandable.
     If clicking on a specific spell level, we'll switch to a single column view with much more detail per spell, not requiring a button to expand the description.
-
 */
