@@ -1,6 +1,7 @@
 const SPELL_SCHOOLS = ["Abjuration", "Necromancy", "Illusion", "Conjuration", "Evocation", "Divination", "Enchantment", "Transmutation"]
 
 export class Spell {
+    id: string;
     name: string;
     description: string;
     level: number;
@@ -15,10 +16,11 @@ export class Spell {
     duration?: SpellTime;
     damageType?: string;
 
-    constructor(name: string, description: string, level: number, school?: string, target?: target, castTime?: SpellTime,
+    constructor(id: string, name: string, description: string, level: number, school?: string, target?: target, castTime?: SpellTime,
         isRitual?: boolean, isConcentration?: boolean, source?: string, range?: SpellRange, components?: string, duration?: SpellTime,
         damageType?: string)
     {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.level = level;

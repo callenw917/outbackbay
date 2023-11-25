@@ -8,7 +8,7 @@ export async function GET(request: Request)
     var rawSpells = await prisma.spell.findMany({});
 
     rawSpells.forEach((rawSpell: any) => {
-        spells.push(new Spell(rawSpell.name, rawSpell.details, rawSpell.level));
+        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level));
     });
 
     return Response.json(spells, {

@@ -51,52 +51,52 @@ export default function SpellPage() {
         <div className='spellCardArea'>
           <SpellGroup spellLevel='Cantrips'>  
             {getSortedSpells(spells, 0).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 1'>
             {getSortedSpells(spells, 1).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 2'>
             {getSortedSpells(spells, 2).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 3'>
             {getSortedSpells(spells, 3).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 4'>
             {getSortedSpells(spells, 4).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup>
           <SpellGroup spellLevel='Level 5'>
             {getSortedSpells(spells, 5).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup> 
           <SpellGroup spellLevel='Level 6'>
             {getSortedSpells(spells, 6).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup> 
           <SpellGroup spellLevel='Level 7'>
             {getSortedSpells(spells, 7).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup> 
           <SpellGroup spellLevel='Level 8'>
             {getSortedSpells(spells, 8).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup> 
           <SpellGroup spellLevel='Level 9'>
             {getSortedSpells(spells, 9).map((spell: any) => (
-              <SpellCard spell={spell} onClick={openDetailedViewHandler}/>
+              <SpellCard key={spell.id} spell={spell} onClick={openDetailedViewHandler}/>
             ))}
           </SpellGroup> 
         </div>
@@ -110,13 +110,14 @@ function getSortedSpells(spells: Spell[], level: number): Spell[] {
 
   var sortedSpells: Spell[] = [];
   if (!spells) {return sortedSpells;}
-
-  spells.forEach(spell => {
+  console.log(spells);
+  for (const spell of spells)
+  {
     if (spell.level == level)
     {
       sortedSpells.push(spell);
     }  
-  });
+  };
   
   return sortedSpells;
 }
