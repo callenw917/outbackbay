@@ -22,6 +22,8 @@ async function getSpells()
      }
   });
 
+  console.log(spellJson);
+
   return spellJson.json();
 };
 
