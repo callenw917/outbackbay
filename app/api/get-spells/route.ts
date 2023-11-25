@@ -11,5 +11,11 @@ export async function GET(request: Request)
         spells.push(new Spell(rawSpell.name, rawSpell.details, rawSpell.level));
     });
 
-    return Response.json(spells);
+    return Response.json(spells, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        }
+    });
 }
