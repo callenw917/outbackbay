@@ -111,15 +111,15 @@ export default function SpellPage() {
 function getSortedSpells(spells: Spell[], level: number): Spell[] {
 
   var sortedSpells: Spell[] = [];
-  if (!spells) {return sortedSpells;}
+  // if (!spells) {return sortedSpells;}
 
-  for (const spell of spells)
-  {
-    if (spell.level == level)
-    {
-      sortedSpells.push(spell);
-    }  
-  };
+  // for (const spell of spells)
+  // {
+  //   if (spell.level == level)
+  //   {
+  //     sortedSpells.push(spell);
+  //   }  
+  // };
   
   return sortedSpells;
 }
