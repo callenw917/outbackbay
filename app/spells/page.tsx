@@ -15,7 +15,7 @@ async function getSpells()
 { 
   //Call API here
   
-  var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
+  var spellJson = await fetch('https://www.outbackbay.com/api/get-spells', {
     method: "GET",
      headers: {
        Accept: 'application/json'
