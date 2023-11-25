@@ -4,7 +4,7 @@
         "source": "/api/(.*)",
         "headers": [
           { "key": "Access-Control-Allow-Credentials", "value": "" },
-          { "key": "Access-Control-Allow-Origin", "value": "www.outbackbay.com, outbackbay.com" },
+          { "key": "Access-Control-Allow-Origin", "value": "https://www.outbackbay.com, https://outbackbay.com" },
           { "key": "Access-Control-Allow-Methods", "value": "" },
           { "key": "Access-Control-Allow-Headers", "value": "" }
         ]
