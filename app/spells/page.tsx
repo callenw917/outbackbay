@@ -17,7 +17,9 @@ async function getSpells()
   
   var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
     method: "GET",
-    headers: {Accept: 'application/json'}
+    // headers: {
+    //   Accept: 'application/json'
+    // }
   });
 
   return spellJson.json();
@@ -110,7 +112,7 @@ function getSortedSpells(spells: Spell[], level: number): Spell[] {
 
   var sortedSpells: Spell[] = [];
   if (!spells) {return sortedSpells;}
-  console.log(spells);
+
   for (const spell of spells)
   {
     if (spell.level == level)
