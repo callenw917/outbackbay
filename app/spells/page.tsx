@@ -5,16 +5,12 @@ import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSe
 import { SpellCard } from '@/components/SpellCard/SpellCard';
 import 'public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
-import { Spell, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
-import { SpellCardCustom } from '@/components/SpellCard/SpellCardCustom';
+import { Spell } from '@/shared/lib/spell';
 import { use, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
-import prisma from '@/lib/prisma';
 
 async function getSpells()
 { 
-  //Call API here
-  
   var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
     method: "GET",
      headers: {
@@ -22,8 +18,6 @@ async function getSpells()
      },
      cache: 'no-store'
   });
-
-  console.log(spellJson);
 
   return spellJson.json();
 };
@@ -34,17 +28,9 @@ export default function SpellPage() {
 
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
 
-  function closeDetailedViewHandler() { 
-    console.log("Closing Detailed Card");
-    setDetailedCardVisible(false); 
-  }
+  function closeDetailedViewHandler() { setDetailedCardVisible(false); }
 
-  function openDetailedViewHandler(selectedSpell: Spell)
-  {
-    console.log("Opening Detailed Card");
-    selectedSpell = selectedSpell;
-    setDetailedCardVisible(true);
-  }
+  function openDetailedViewHandler(selectedSpell: Spell) { setDetailedCardVisible(true); }
 
   var spells: Spell[] = use(spellPromise);
 
