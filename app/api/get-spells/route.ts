@@ -14,7 +14,7 @@ export async function GET(request: Request)
     return Response.json(spells, {
         status: 200,
         headers: {
-          "Access-Control-Allow-Origin": "https://www.outbackbay.com, https://outbackbay.com",
+          "Access-Control-Allow-Origin": "https://www.outbackbay.com, https://outbackbay.com, http://localhost:3000",
           "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
           "Access-Control-Allow-Headers":
             "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",

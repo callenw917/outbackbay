@@ -88,3 +88,17 @@ export enum rangeUnit
     miles,
     self
 }
+
+export const spellLevel: { [key: string]: string } = {
+    all: "All",
+    cantrip: 'Cantrips',
+    level1: '1',
+    level2: '2',
+    level3: '3',
+    level4: '4',
+    level5: '5',
+    level6: '6',
+    level7: '7',
+    level8: '8',
+    level9: '9',
+  };
