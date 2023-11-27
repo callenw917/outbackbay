@@ -6,7 +6,7 @@ import { SpellCard } from '@/components/SpellCard/SpellCard';
 import 'public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
 import { ClassSelectDropdown } from '@/components/ClassSelectDropdown/ClassSelectDropdown';
-import { Spell, spellLevel } from '@/shared/lib/spell';
+import { Spell, playerClass, spellLevel } from '@/shared/lib/spell';
 import { use, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
 
@@ -29,7 +29,7 @@ export default function SpellPage() {
 
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState(spellLevel.all)
-  const [selectedClass, setSelectedClass] = useState('All');
+  const [selectedClass, setSelectedClass] = useState(playerClass.wizard);
 
   function closeDetailedViewHandler() { setDetailedCardVisible(false); }
 

@@ -15,13 +15,13 @@ export function ClassSelectDropdown(props: classSelectDropdownProps) {
             props.onClick(chosenClass);
         }
     }
-    
+
     return (
         <Select
             label="Class"
             placeholder="Pick value"
             data={Object.keys(playerClass).map(function(key){ return playerClass[key]; })}
-            defaultValue='All'
+            defaultValue='Wizard'
             value={props.selectedClass}
             onChange={onClassChange}
         />
