@@ -1,6 +1,7 @@
 import { playerClass } from '@/shared/lib/spell';
 import { Select } from '@mantine/core';
 import { useState } from 'react';
+import classes from './ClassSelectDropdown.module.css'
 
 type classSelectDropdownProps = {
     onClick: Function,
@@ -18,12 +19,13 @@ export function ClassSelectDropdown(props: classSelectDropdownProps) {
 
     return (
         <Select
-            label="Class"
             placeholder="Pick value"
             data={Object.keys(playerClass).map(function(key){ return playerClass[key]; })}
             defaultValue='Wizard'
             value={props.selectedClass}
             onChange={onClassChange}
+            classNames={classes}
+            radius='xl'
         />
     );
 }

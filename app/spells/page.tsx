@@ -9,6 +9,7 @@ import { ClassSelectDropdown } from '@/components/ClassSelectDropdown/ClassSelec
 import { Spell, playerClass, spellLevel } from '@/shared/lib/spell';
 import { use, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
+import { Group } from '@mantine/core';
 
 async function getSpells()
 { 
@@ -44,9 +45,10 @@ export default function SpellPage() {
   return (
     <>
       <div className='mainArea'>
-        <Welcome />
-        <ClassSelectDropdown onClick={classFilterChangeHandler} selectedClass={selectedClass}/>
-        <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel}/>
+        <Group wrap='nowrap' align='flex-start' className='header'>
+          <ClassSelectDropdown onClick={classFilterChangeHandler} selectedClass={selectedClass}/>
+          <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel}/>
+        </Group>
         <div className='spellCardArea'>
           {(selectedLevel == spellLevel.all || selectedLevel == spellLevel.cantrip) &&
           <SpellGroup spellLevel='Cantrips'>  

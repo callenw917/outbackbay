@@ -37,3 +37,12 @@
 {
     min-width: 20em;
 }
+
+.header
+{
+    width: 100%;
+    align-items: center;
+    padding-left: 0.5em;
+    border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    background-color: #dbe4ff;
+}

@@ -21,9 +21,8 @@ export function SpellLevelSelector(props: spellLevelSelectorType) {
         onChange={spellLevelSelectHandler}
         classNames={classes}
         radius="md"
-        mt={20}
         size="md"
-        color='blue'
+        color='#364fc7'
         data={Object.keys(spellLevel).map(function(key){ return spellLevel[key]; })}
         />
     </Group>
