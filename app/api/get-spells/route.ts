@@ -1,4 +1,4 @@
-import { Spell } from "@/shared/lib/spell";
+import { Spell, playerClass } from "@/shared/lib/spell";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: Request)
@@ -8,7 +8,8 @@ export async function GET(request: Request)
     var rawSpells = await prisma.spell.findMany({});
 
     rawSpells.forEach((rawSpell: any) => {
-        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level));
+        var classArray: string[] = buildClassArray(rawSpell);
+        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level, classArray));
     });
 
     return Response.json(spells, {
@@ -21,4 +22,19 @@ export async function GET(request: Request)
           "Access-Control-Max-Age": "86400",
         }
     });
+}
+
+function buildClassArray(rawSpell: any): string[]
+{
+  var classArray: string[] = ['All'];
+  if (rawSpell.artificer) {classArray.push(playerClass.artificer)};
+  if (rawSpell.bard) {classArray.push(playerClass.bard)};
+  if (rawSpell.cleric) {classArray.push(playerClass.cleric)};
+  if (rawSpell.druid) {classArray.push(playerClass.druid)};
+  if (rawSpell.paladin) {classArray.push(playerClass.paladin)};
+  if (rawSpell.ranger) {classArray.push(playerClass.ranger)};
+  if (rawSpell.sorcerer) {classArray.push(playerClass.sorcerer)};
+  if (rawSpell.warlock) {classArray.push(playerClass.warlock)};
+  if (rawSpell.wizard) {classArray.push(playerClass.wizard)};
+  return classArray;
 }

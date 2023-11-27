@@ -2,25 +2,21 @@
 
 import { Group, SegmentedControl } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
-import { useState } from 'react';
 import { spellLevel } from '@/shared/lib/spell';
 
 type spellLevelSelectorType = {
   onClick: Function
+  selectedLevel: string
 };
 
 export function SpellLevelSelector(props: spellLevelSelectorType) {
-    const [value, setValue] = useState(spellLevel.all);
 
-    function spellLevelSelectHandler(value: string) {
-      setValue(value);
-      props.onClick(value);
-    };
+    function spellLevelSelectHandler(value: string) { props.onClick(value); };
 
     return (
     <Group justify='center'>
         <SegmentedControl
-        value={value}
+        value={props.selectedLevel}
         defaultValue='All'
         onChange={spellLevelSelectHandler}
         classNames={classes}

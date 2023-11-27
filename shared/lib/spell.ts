@@ -5,6 +5,7 @@ export class Spell {
     name: string;
     description: string;
     level: number;
+    classes: string[]
     school?: string;
     isRitual?: boolean;
     isConcentration?: boolean;
@@ -16,7 +17,7 @@ export class Spell {
     duration?: SpellTime;
     damageType?: string;
 
-    constructor(id: string, name: string, description: string, level: number, school?: string, target?: target, castTime?: SpellTime,
+    constructor(id: string, name: string, description: string, level: number, classes: string[], school?: string, target?: target, castTime?: SpellTime,
         isRitual?: boolean, isConcentration?: boolean, source?: string, range?: SpellRange, components?: string, duration?: SpellTime,
         damageType?: string)
     {
@@ -24,6 +25,7 @@ export class Spell {
         this.name = name;
         this.description = description;
         this.level = level;
+        this.classes = classes;
         this.school = school;
         this.target = target;
         this.castTime = castTime;
@@ -102,3 +104,16 @@ export const spellLevel: { [key: string]: string } = {
     level8: '8',
     level9: '9',
   };
+
+export const playerClass: {[key: string]: string} = {
+    all: "All", 
+    artificer: "Artificer", 
+    bard: "Bard", 
+    cleric: "Cleric", 
+    druid: "Druid", 
+    paladin: "Paladin", 
+    ranger: "Ranger", 
+    sorcerer: "Sorcerer", 
+    warlock: "Warlock", 
+    wizard: "Wizard"
+}

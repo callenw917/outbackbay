@@ -8,17 +8,7 @@
 
 .spellCardArea
 {
-    /* flex parent styles */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 50px;
-
-    /* Other styles */
-    padding: 2em 4em;
-    width: 100%;
+    width: 83em;
 }
 
 .spellGroup
@@ -33,6 +23,9 @@
 
     /* flex child styles */
     flex: 0 0 30em; 
+
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .spellGroup .title
