@@ -11,27 +11,36 @@
     /* flex parent styles */
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 50px;
 
     /* Other styles */
     padding: 2em 4em;
-    max-width: 120em;
+    width: 100%;
 }
 
 .spellGroup
 {
     /* flex parent styles */
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: left;
+    flex-wrap: wrap;
+    width: 83em;
+    gap: 1em;
 
     /* flex child styles */
     flex: 0 0 30em; 
 }
 
+.spellGroup .title
+{
+    flex-basis: 100%;
+}
+
 .spellCard
 {
-
+    min-width: 20em;
 }

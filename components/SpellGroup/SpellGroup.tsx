@@ -10,8 +10,8 @@ type SpellGroupProps = {
 export function SpellGroup(props: SpellGroupProps) {
     return (
         <div className="spellGroup">
-            <Title order={2}>{props.spellLevel}</Title>
-            <Divider variant="dashed"/>
+            <Title order={2} className="title">{props.spellLevel}</Title>
+            <Divider className="title" variant="dashed"/>
             {props.children}
         </div>
     )
