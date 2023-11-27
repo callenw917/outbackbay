@@ -124,7 +124,7 @@ function getSortedSpells(spells: Spell[], level: number, selectedClass: string):
 
   for (const spell of spells)
   {
-    if (spell.level == level && spell.classes.includes(selectedClass))
+    if (spell.level == level && spell.classes?.includes(selectedClass))
     {
       sortedSpells.push(spell);
     }  
