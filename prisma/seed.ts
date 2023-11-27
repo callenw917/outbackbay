@@ -14,7 +14,7 @@ async function main()
     console.log("Done");
 
     const options = {
-        columns: ['name','level','school','casting_time','duration','range','area','attack','save','damage_or_effect','ritual','concentration','verbal','somatic','material','material_object','source','details','link'],
+        columns: ['name','level','school','casting_time','duration','range','area','attack','save','damage_or_effect','ritual','concentration','verbal','somatic','material','material_object','source','details','link','wizard','warlock','sorcerer','ranger','paladin','druid','cleric','bard','artificer'],
         delimiter: ',',
         cast: function(value: any, context: any)
         {
@@ -24,6 +24,15 @@ async function main()
             if (context.column === 'verbal') return Boolean(value);
             if (context.column === 'somatic') return Boolean(value);
             if (context.column === 'material') return Boolean(value);
+            if (context.column === 'artificer') return Boolean(value);
+            if (context.column === 'bard') return Boolean(value);
+            if (context.column === 'cleric') return Boolean(value);
+            if (context.column === 'paladin') return Boolean(value);
+            if (context.column === 'ranger') return Boolean(value);
+            if (context.column === 'sorcerer') return Boolean(value);
+            if (context.column === 'druid') return Boolean(value);
+            if (context.column === 'warlock') return Boolean(value);
+            if (context.column === 'wizard') return Boolean(value);
             
             return value;
         }

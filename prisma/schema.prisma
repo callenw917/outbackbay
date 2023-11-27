@@ -34,4 +34,13 @@ model Spell {
     source              String
     details             String
     link                String
+    artificer           Boolean
+    bard                Boolean
+    cleric              Boolean
+    druid               Boolean
+    paladin             Boolean
+    ranger              Boolean
+    sorcerer            Boolean
+    warlock             Boolean
+    wizard              Boolean
 }
