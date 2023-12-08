@@ -19,7 +19,7 @@ export function SpellCard(props: SpellCardProps) {
             <Group>
                 <Title order={6}>{spell.name}</Title>
                 {/* Look into Mantine.Collapsed for hiding and displaying the long description.  */}
-                <Badge size="sm">{props.spell.castTime}</Badge>
+                <Badge className={classes.badge} size="sm">{props.spell.castTime}</Badge>
             </Group>
         </Paper>
     )
