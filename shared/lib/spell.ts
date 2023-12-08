@@ -11,13 +11,13 @@ export class Spell {
     isConcentration?: boolean;
     source?: string;
     target?: target;
-    castTime?: SpellTime;
+    castTime?: string;
     range?: SpellRange;
     components?: string;
     duration?: SpellTime;
     damageType?: string;
 
-    constructor(id: string, name: string, description: string, level: number, classes: string[], school?: string, target?: target, castTime?: SpellTime,
+    constructor(id: string, name: string, description: string, level: number, classes: string[], school?: string, target?: target, castTime?: string,
         isRitual?: boolean, isConcentration?: boolean, source?: string, range?: SpellRange, components?: string, duration?: SpellTime,
         damageType?: string)
     {

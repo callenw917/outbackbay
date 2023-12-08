@@ -1,4 +1,4 @@
-import { Spell, playerClass } from "@/shared/lib/spell";
+import { Spell, playerClass, SpellTime } from "@/shared/lib/spell";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: Request)
@@ -9,7 +9,7 @@ export async function GET(request: Request)
 
     rawSpells.forEach((rawSpell: any) => {
         var classArray: string[] = buildClassArray(rawSpell);
-        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level, classArray));
+        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level, classArray,"",undefined,rawSpell.casting_time));
     });
 
     return Response.json(spells, {

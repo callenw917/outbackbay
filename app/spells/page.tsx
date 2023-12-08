@@ -10,6 +10,9 @@ import { Spell, playerClass, spellLevel } from '@/shared/lib/spell';
 import { use, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
 import { Group } from '@mantine/core';
+import { SpellCardDetailedView } from '@/components/SpellCardDetailedView/SpellCardDetailedView';
+
+var spellToOpen: Spell;
 
 async function getSpells()
 { 
@@ -34,7 +37,10 @@ export default function SpellPage() {
 
   function closeDetailedViewHandler() { setDetailedCardVisible(false); }
 
-  function openDetailedViewHandler(selectedSpell: Spell) { setDetailedCardVisible(true); }
+  function openDetailedViewHandler(selectedSpell: Spell) { 
+    setDetailedCardVisible(true);
+    spellToOpen = selectedSpell;
+  }
 
   function levelFilterChangeHandler(selectedLevel: string) { setSelectedLevel(selectedLevel); }
 
@@ -112,6 +118,7 @@ export default function SpellPage() {
           </SpellGroup>}
         </div>
       </div>
+      <SpellCardDetailedView spell={spellToOpen} opened={detailedCardVisible} close={closeDetailedViewHandler}></SpellCardDetailedView>
       {detailedCardVisible && <InactiveArea onClick={closeDetailedViewHandler}/>}
     </>
   );
