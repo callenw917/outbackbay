@@ -43,18 +43,44 @@ export class SpellTime
 {
     amount: number;
     unit: timeUnit;
+    plural: boolean;
+    shouldSkipAmount: boolean;
 
     constructor(amount: number, unit: timeUnit)
     {
         this.amount = amount;
         this.unit = unit;
+        this.plural = amount > 1;
+        switch (unit)
+        {
+            case timeUnit.second:
+            case timeUnit.minute:
+            case timeUnit.hour:
+            case timeUnit.day:
+            case timeUnit.week:
+            case timeUnit.year:
+                this.shouldSkipAmount = false;
+            case timeUnit.special:
+            case timeUnit.action:
+            case timeUnit.bonusAction:
+            case timeUnit.reaction:
+                this.shouldSkipAmount = true;
+        }
     }
-}
 
-export function printSpellTime(spellTime: SpellTime, short: boolean): string
-{
-    const plural = spellTime.amount > 1;
-    return "";
+    toString(): string 
+    {
+        return !this.shouldSkipAmount ? 
+            this.amount.toString() + " " + printTimeUnit(this.unit, false, true) :
+            printTimeUnit(this.unit, false, true) ;
+    }
+
+    toStringShort(): string 
+    {
+        return !this.shouldSkipAmount ? 
+            this.amount.toString() + " " + printTimeUnit(this.unit, true, true) :
+            printTimeUnit(this.unit, true, true) ;
+    }
 }
 
 export class SpellRange
