@@ -51,6 +51,11 @@ export class SpellTime
     }
 }
 
+export function printSpellTime(): string
+{
+    return "";
+}
+
 export class SpellRange
 {
     amount: number;
@@ -83,6 +88,33 @@ export enum timeUnit
     bonusAction,
     reaction
 };
+
+export function printTimeUnit(unit: timeUnit, short: boolean, plural: boolean): string
+{
+    switch (unit)
+    {
+        case timeUnit.second:
+            return short? "Sec" : (plural ? "Seconds" : "Second");
+        case timeUnit.minute:
+            return short? "Min" : (plural ? "Seconds" : "Second");
+        case timeUnit.hour:
+            return short? "Hr" : (plural ? "Seconds" : "Second");
+        case timeUnit.day:
+            return short? "D" : (plural ? "Seconds" : "Second");
+        case timeUnit.week:
+            return short? "Wk" : (plural ? "Seconds" : "Second");
+        case timeUnit.year:
+            return short? "Yr" : (plural ? "Seconds" : "Second");
+        case timeUnit.special:
+            return short? "Sp" : (plural ? "Special" : "Special");
+        case timeUnit.action:
+            return short? "A" : (plural ? "Actions" : "Action");
+        case timeUnit.bonusAction:
+            return short? "BA" : (plural ? "Bonus Actions" : "Bonus Action");
+        case timeUnit.reaction:
+            return short? "R" : (plural ? "Reactions" : "Reaction");
+    }
+}
 
 export enum rangeUnit
 {
