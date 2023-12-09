@@ -51,8 +51,9 @@ export class SpellTime
     }
 }
 
-export function printSpellTime(): string
+export function printSpellTime(spellTime: SpellTime, short: boolean): string
 {
+    const plural = spellTime.amount > 1;
     return "";
 }
 
