@@ -1,4 +1,4 @@
-import { Spell, playerClass, SpellTime } from "@/shared/lib/spell";
+import { Spell, playerClass, SpellTime, timeUnit } from "@/shared/lib/spell";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: Request)
@@ -6,6 +6,19 @@ export async function GET(request: Request)
     var spells: Spell[] = [];
 
     var rawSpells = await prisma.spell.findMany({});
+
+    const spellTimeMap = new Map<string, timeUnit>([
+      ["Second", timeUnit.second],
+      ["Minute", timeUnit.minute],
+      ["Hour", timeUnit.hour],
+      ["Day", timeUnit.day],
+      ["Week", timeUnit.week],
+      ["Year", timeUnit.year],
+      ["Special", timeUnit.special],
+      ["Action", timeUnit.action],
+      ["Bonus Action", timeUnit.bonusAction],
+      ["Reaction", timeUnit.reaction]
+    ]);
 
     rawSpells.forEach((rawSpell: any) => {
         var classArray: string[] = buildClassArray(rawSpell);
