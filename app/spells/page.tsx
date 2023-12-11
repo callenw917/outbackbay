@@ -21,7 +21,7 @@ async function getSpells()
      headers: {
        Accept: 'application/json'
      },
-     cache: 'no-store'
+     //cache: 'no-store'
   });
 
   return spellJson.json();
