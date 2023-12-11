@@ -22,7 +22,12 @@ export async function GET(request: Request)
 
     rawSpells.forEach((rawSpell: any) => {
         var classArray: string[] = buildClassArray(rawSpell);
-        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level, classArray,"",undefined,rawSpell.casting_time));
+        var castTime: SpellTime | undefined = undefined;
+        if (rawSpell.casting_time_amount && rawSpell.casting_time_unit)
+        {
+          castTime = new SpellTime(rawSpell.casting_time_amount,(spellTimeMap.get(rawSpell.casting_time_unit) || timeUnit.special));
+        }
+        spells.push(new Spell(rawSpell.id, rawSpell.name, rawSpell.details, rawSpell.level, classArray,"",undefined,castTime));
     });
 
     return Response.json(spells, {

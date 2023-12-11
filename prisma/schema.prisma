@@ -14,14 +14,19 @@ datasource db {
 }
 
 model Spell {
-    id              String  @default(cuid()) @id
+    id                  String  @default(cuid()) @id
     name                String
     level               Int
     school              String
-    casting_time        String
-    duration            String
-    range               String
-    area                String
+    casting_time_amount Int
+    casting_time_unit   String
+    duration_amount     Int
+    duration_unit       String
+    range_amount        Int
+    range_unit          String
+    area_type           String?
+    area_amount         Int?
+    area_unit           String?
     attack              String
     save                String
     damage_or_effect    String

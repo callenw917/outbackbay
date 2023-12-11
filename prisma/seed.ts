@@ -14,26 +14,35 @@ async function main()
     console.log("Done");
 
     const options = {
-        columns: ['name','level','school','casting_time','duration','range','area','attack','save','damage_or_effect','ritual','concentration','verbal','somatic','material','material_object','source','details','link','wizard','warlock','sorcerer','ranger','paladin','druid','cleric','bard','artificer'],
+        columns: ['name','level','school','casting_time_amount', 'casting_time_unit','duration_amount', 'duration_unit','range_amount', 'range_unit','area_type', 'area_amount', 'area_unit','attack','save','damage_or_effect','ritual','concentration','verbal','somatic','material','material_object','source','details','link','wizard','warlock','sorcerer','ranger','paladin','druid','cleric','bard','artificer'],
         delimiter: ',',
         cast: function(value: any, context: any)
         {
-            if (context.column === 'level') return Number(value);
-            if (context.column === 'ritual') return Boolean(value);
-            if (context.column === 'concentration') return Boolean(value);
-            if (context.column === 'verbal') return Boolean(value);
-            if (context.column === 'somatic') return Boolean(value);
-            if (context.column === 'material') return Boolean(value);
-            if (context.column === 'artificer') return Boolean(value);
-            if (context.column === 'bard') return Boolean(value);
-            if (context.column === 'cleric') return Boolean(value);
-            if (context.column === 'paladin') return Boolean(value);
-            if (context.column === 'ranger') return Boolean(value);
-            if (context.column === 'sorcerer') return Boolean(value);
-            if (context.column === 'druid') return Boolean(value);
-            if (context.column === 'warlock') return Boolean(value);
-            if (context.column === 'wizard') return Boolean(value);
-            
+            switch (context.column)
+            {
+                case 'level':
+                case 'casting_time_amount':
+                case 'duration_amount':
+                case 'range_amount':
+                case 'area_amount':
+                    if (!value) {return null;}
+                    return Number(value);
+                case 'ritual':
+                case 'concentration':
+                case 'verbal':
+                case 'somatic':
+                case 'material':
+                case 'artificer':
+                case 'bard':
+                case 'cleric':
+                case 'paladin':
+                case 'ranger':
+                case 'sorcerer':
+                case 'druid':
+                case 'warlock':
+                case 'wizard':
+                    return Boolean(value);
+            }
             return value;
         }
     };
@@ -42,10 +51,12 @@ async function main()
     const fileContent = fs.readFileSync(csvPath, {encoding: 'utf-8'});
 
     // Parse the CSV data
+    console.log('Parsing the CSV data');
     const records = csv_parse.parse(fileContent, options, (error: any, result: any) => {
-        //if (error) {console.log(error);}
+        if (error) {console.log(error);}
     });
 
+    console.log('Creating the records');
     await prisma.spell.createMany({
         data: records
     });
