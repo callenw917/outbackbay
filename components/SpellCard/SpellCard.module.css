@@ -1,8 +1,8 @@
 .root:hover {
-    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.16);
-    cursor: pointer;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
 }
 
 .badge {
-    margin-left: auto;
+  margin-left: auto;
 }
