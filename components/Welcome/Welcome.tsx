@@ -5,7 +5,7 @@ export function Welcome() {
   return (
     <>
       <Title className={classes.title} ta="center" mt={50}>
-        Welcome, {' '}
+        Welcome,{' '}
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
           Pyr Kana
         </Text>

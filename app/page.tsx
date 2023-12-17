@@ -5,9 +5,11 @@ import { Button } from '@mantine/core';
 export default function HomePage() {
   return (
     <>
-      <div className='mainArea'>
+      <div className="mainArea">
         <Welcome />
-        <Button component="a" href="/spells" variant='outline'>Spell Library</Button>
+        <Button component="a" href="/spells" variant="outline">
+          Spell Library
+        </Button>
       </div>
     </>
   );
