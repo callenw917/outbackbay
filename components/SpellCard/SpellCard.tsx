@@ -14,8 +14,6 @@ export function SpellCard(props: SpellCardProps) {
   var spell: Spell = props.spell;
   var castTime: SpellTime | undefined = spell.castTime as SpellTime | undefined;
   var castingTime = castTime instanceof SpellTime ? castTime.toStringShort() : null;
-  console.log('Type and value of spell.castTime:', typeof spell.castTime, spell.castTime);
-  console.log('Type and value of castTime:', typeof castTime, castTime);
 
   return (
     <Paper
@@ -33,7 +31,7 @@ export function SpellCard(props: SpellCardProps) {
         <Title order={6}>{spell.name}</Title>
         {/* Look into Mantine.Collapsed for hiding and displaying the long description.  */}
         {castingTime && (
-          <Badge className={classes.badge} size="sm">
+          <Badge className={classes.badge} size="sm" color={castTime?.color()}>
             {castingTime}
           </Badge>
         )}
