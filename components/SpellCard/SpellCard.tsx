@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Group, Paper, Text, Title } from '@mantine/core';
+import { Badge, Group, Paper, Text, Title, Box } from '@mantine/core';
 import classes from './SpellCard.module.css';
 import { Spell, SpellTime, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
 import { MouseEventHandler } from 'react';
@@ -36,6 +36,14 @@ export function SpellCard(props: SpellCardProps) {
           </Badge>
         )}
       </Group>
+      <Box
+        bg={castTime?.color()}
+        pos={'relative'}
+        left={'-12px'}
+        w={'calc(100% + 24px)'}
+        h={'6px'}
+        bottom={'-12px'}
+      ></Box>
     </Paper>
   );
 }
