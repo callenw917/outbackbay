@@ -69,7 +69,9 @@ export default function SpellPage(props: spellViewerProps) {
         classArray,
         '',
         undefined,
-        castTime
+        castTime,
+        rawSpell.ritual,
+        rawSpell.concentration
       )
     );
   });

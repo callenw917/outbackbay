@@ -30,6 +30,16 @@ export function SpellCard(props: SpellCardProps) {
       <Group>
         <Title order={6}>{spell.name}</Title>
         {/* Look into Mantine.Collapsed for hiding and displaying the long description.  */}
+        {spell.requiresConc && (
+          <Badge className={classes.badge} size="sm" color="yellow">
+            C
+          </Badge>
+        )}
+        {spell.isRitual && (
+          <Badge className={classes.badge} size="sm" color="indigo">
+            R
+          </Badge>
+        )}
         {castingTime && (
           <Badge className={classes.badge} size="sm" color={castTime?.color()}>
             {castingTime}

@@ -17,7 +17,7 @@ export class Spell {
   classes: string[];
   school?: string;
   isRitual?: boolean;
-  isConcentration?: boolean;
+  requiresConc?: boolean;
   source?: string;
   target?: target;
   castTime?: SpellTime;
@@ -52,7 +52,7 @@ export class Spell {
     this.target = target;
     this.castTime = castTime;
     this.isRitual = isRitual;
-    this.isConcentration = isConcentration;
+    this.requiresConc = isConcentration;
     this.source = source;
     this.range = range;
     this.components = components;
