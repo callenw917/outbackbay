@@ -3,7 +3,7 @@
 //#region imports
 import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
 import { SpellCard } from '@/components/SpellCard/SpellCard';
-import 'public/global.css';
+import '@/public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
 import { ClassSelectDropdown } from '@/components/ClassSelectDropdown/ClassSelectDropdown';
 import {

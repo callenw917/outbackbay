@@ -1,7 +1,4 @@
 // schema.prisma
-// NOTE: any time this is changed, run 'npx prisma db push' to create the new tables and 'npx prisma generate' to create update the client
-// NOTE: do open the dbms, run 'npx prisma studio'
-// NOTE: run 'npx prisma db seed' to populate data from seed.ts
 
 generator client {
     provider = "prisma-client-js"

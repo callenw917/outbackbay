@@ -1,5 +1,5 @@
 import { Welcome } from '../components/Welcome/Welcome';
-import 'public/global.css';
+import '@/public/global.css';
 import { Button } from '@mantine/core';
 
 export default function HomePage() {
