@@ -1,5 +1,3 @@
-import { Children } from 'react';
-import { SpellCard } from '../SpellCard/SpellCard';
 import { Divider, Title } from '@mantine/core';
 
 type SpellGroupProps = {

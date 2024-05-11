@@ -17,9 +17,6 @@ export default async function SpellPage() {
   const rawSpells = await getSpells();
   return (
     <>
-      <head>
-        <title>Spells</title>
-      </head>
       <SpellViewer rawSpells={rawSpells}></SpellViewer>;
     </>
   );

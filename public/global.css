@@ -6,9 +6,18 @@
     align-items: center;
 }
 
+.appArea
+{
+    padding-top: 6em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .spellCardArea
 {
-    width: 83em;
+    width: 80%;
 }
 
 .spellGroup
@@ -16,9 +25,9 @@
     /* flex parent styles */
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
-    width: 83em;
+    width: 100%;
     gap: 1em;
 
     /* flex child styles */
@@ -33,9 +42,16 @@
     flex-basis: 100%;
 }
 
-.spellCard
+.spellCardSmall
 {
     min-width: 20em;
+}
+
+.spellCardLarge
+{
+    min-width: 20em;
+    height: 20em;
+    position: relative;
 }
 
 .header

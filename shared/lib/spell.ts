@@ -254,3 +254,9 @@ export const playerClass: { [key: string]: string } = {
   warlock: 'Warlock',
   wizard: 'Wizard',
 };
+
+export const cardViews : { [key: string]: string} = {
+  smallCard: 'Small Card',
+  largeCard: 'Large Card',
+  list: 'List',
+}

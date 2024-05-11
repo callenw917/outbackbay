@@ -4,10 +4,10 @@ import classes from './Welcome.module.css';
 export function Welcome() {
   return (
     <>
-      <Title className={classes.title} ta="center" mt={50}>
-        Welcome,{' '}
+      <Title className={classes.title} ta="center" mt={5}>
+        Welcome To{' '}
         <Text inherit variant="gradient" component="span" gradient={{ from: 'pink', to: 'yellow' }}>
-          Pyr Kana
+          Outback Bay
         </Text>
       </Title>
     </>
