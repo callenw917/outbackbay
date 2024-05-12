@@ -1,8 +1,9 @@
 'use client';
 
-import { Badge, Group, Paper, Title, Box, Center } from '@mantine/core';
+import { Badge, Group, Paper, Title, Box, Center, Text } from '@mantine/core';
 import classes from './SpellCardLarge.module.css';
 import { Spell, SpellTime } from '@/shared/lib/spell';
+import { Span } from 'next/dist/trace';
 
 type SpellCardProps = {
   spell: Spell;
@@ -11,8 +12,6 @@ type SpellCardProps = {
 
 export function SpellCardLarge(props: SpellCardProps) {
   var spell: Spell = props.spell;
-  var castTime: SpellTime | undefined = spell.castTime as SpellTime | undefined;
-  var castingTime = castTime instanceof SpellTime ? castTime.toStringShort() : null;
 
   return (
     <Paper
@@ -46,8 +45,14 @@ export function SpellCardLarge(props: SpellCardProps) {
           )} */}
         </Group>
       </Center>
+      <Group justify='center' c='gray.6'>
+          <Text>{spell.castTime?.toString()}  •  {spell.range?.toString()}  •  {spell.getComponents()}  •  {spell.duration?.toString()} </Text>
+      </Group>
+      <Group>
+        <Text className='spellDescriptionShort'>{spell.description}</Text>
+      </Group>
       <Box
-        bg={castTime?.color()}
+        bg={spell.castTime?.color()}
         pos={'absolute'}
         left={'-12px'}
         w={'calc(100% + 24px)'}

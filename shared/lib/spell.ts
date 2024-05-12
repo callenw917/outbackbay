@@ -25,6 +25,9 @@ export class Spell {
   components?: string;
   duration?: SpellTime;
   damageType?: string;
+  verbal: boolean;
+  somatic: boolean;
+  material: boolean;
 
   constructor(
     id: string,
@@ -32,6 +35,9 @@ export class Spell {
     description: string,
     level: number,
     classes: string[],
+    verbal: boolean,
+    somatic: boolean,
+    material: boolean,
     school?: string,
     target?: target,
     castTime?: SpellTime,
@@ -41,7 +47,7 @@ export class Spell {
     range?: SpellRange,
     components?: string,
     duration?: SpellTime,
-    damageType?: string
+    damageType?: string,
   ) {
     this.id = id;
     this.name = name;
@@ -58,6 +64,17 @@ export class Spell {
     this.components = components;
     this.duration = duration;
     this.damageType = damageType;
+    this.verbal = verbal;
+    this.somatic = somatic;
+    this.material = material;
+  }
+
+  getComponents(): string {
+    var components: string = "";
+    if (this.verbal) { components = components + "V";}
+    if (this.somatic) { components = components + " S";}
+    if (this.material) { components = components + " M";}
+    return components;
   }
 }
 
@@ -114,6 +131,7 @@ export class SpellTime {
         this.shouldSkipAmount = false;
         break;
       case timeUnit.special:
+      case timeUnit.instant:
       case timeUnit.action:
       case timeUnit.bonusAction:
       case timeUnit.reaction:
@@ -123,8 +141,8 @@ export class SpellTime {
 
   toString(): string {
     return !this.shouldSkipAmount
-      ? this.amount.toString() + ' ' + printTimeUnit(this.unit, false, true)
-      : printTimeUnit(this.unit, false, true);
+      ? this.amount.toString() + ' ' + printTimeUnit(this.unit, false, this.plural)
+      : printTimeUnit(this.unit, false, this.plural);
   }
 
   toStringShort(): string {
@@ -151,18 +169,56 @@ export class SpellTime {
       case timeUnit.reaction:
         return 'grape';
     }
+    return 'green';
   }
 }
 
 export class SpellRange {
   amount: number;
   unit: rangeUnit;
+  plural: boolean;
+  needsUnit: boolean;
 
   constructor(amount: number, unit: rangeUnit) {
     this.amount = amount;
     this.unit = unit;
+    this.plural = amount > 1;
+    this.needsUnit = (this.unit == rangeUnit.feet || this.unit == rangeUnit.miles);
+  }
+
+  toString(): string 
+  {
+    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit();
+  }
+
+  printUnit(): string
+  {
+    switch (this.unit) {
+      case rangeUnit.feet:
+        return this.plural ? "Feet" : "Foot";
+      case rangeUnit.miles:
+        return this.plural ? "Miles" : "Mile";
+      case rangeUnit.self:
+        return "Self";
+      case rangeUnit.touch:
+        return "Touch";
+    }
   }
 }
+
+export enum rangeUnit {
+  feet,
+  miles,
+  self,
+  touch
+}
+
+export const rangeUnitMap = new Map<string, rangeUnit>([
+  ['feet', rangeUnit.feet],
+  ['miles', rangeUnit.miles],
+  ['Self', rangeUnit.self],
+  ['Touch', rangeUnit.touch],
+]);
 
 export enum target {
   self,
@@ -179,6 +235,7 @@ export enum timeUnit {
   week,
   year,
   special,
+  instant,
   action,
   bonusAction,
   reaction,
@@ -192,6 +249,7 @@ export const spellTimeMap = new Map<string, timeUnit>([
   ['Week', timeUnit.week],
   ['Year', timeUnit.year],
   ['Special', timeUnit.special],
+  ['Instantaneous', timeUnit.instant],
   ['Action', timeUnit.action],
   ['Bonus Action', timeUnit.bonusAction],
   ['Reaction', timeUnit.reaction],
@@ -202,17 +260,19 @@ export function printTimeUnit(unit: timeUnit, short: boolean, plural: boolean): 
     case timeUnit.second:
       return short ? 'Sec' : plural ? 'Seconds' : 'Second';
     case timeUnit.minute:
-      return short ? 'Min' : plural ? 'Seconds' : 'Second';
+      return short ? 'Min' : plural ? 'Minutes' : 'Minute';
     case timeUnit.hour:
-      return short ? 'Hr' : plural ? 'Seconds' : 'Second';
+      return short ? 'Hr' : plural ? 'Hours' : 'Hour';
     case timeUnit.day:
-      return short ? 'D' : plural ? 'Seconds' : 'Second';
+      return short ? 'D' : plural ? 'Days' : 'Day';
     case timeUnit.week:
-      return short ? 'Wk' : plural ? 'Seconds' : 'Second';
+      return short ? 'Wk' : plural ? 'Weeks' : 'Week';
     case timeUnit.year:
-      return short ? 'Yr' : plural ? 'Seconds' : 'Second';
+      return short ? 'Yr' : plural ? 'Years' : 'Year';
     case timeUnit.special:
-      return short ? 'Sp' : plural ? 'Special' : 'Special';
+      return short ? 'Sp' : 'Special';
+    case timeUnit.instant:
+      return short ? 'I' : 'Instant';
     case timeUnit.action:
       return short ? 'A' : plural ? 'Actions' : 'Action';
     case timeUnit.bonusAction:
@@ -220,12 +280,6 @@ export function printTimeUnit(unit: timeUnit, short: boolean, plural: boolean): 
     case timeUnit.reaction:
       return short ? 'R' : plural ? 'Reactions' : 'Reaction';
   }
-}
-
-export enum rangeUnit {
-  feet,
-  miles,
-  self,
 }
 
 export const spellLevel: { [key: string]: string } = {

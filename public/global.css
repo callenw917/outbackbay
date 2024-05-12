@@ -49,10 +49,11 @@
 
 .spellCardLarge
 {
-    min-width: 20em;
+    width: 20em;
     height: 20em;
     position: relative;
 }
+
 
 .header
 {
