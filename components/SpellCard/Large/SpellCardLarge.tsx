@@ -49,7 +49,7 @@ export function SpellCardLarge(props: SpellCardProps) {
           <Text>{spell.castTime?.toString()}  •  {spell.range?.toString()}  •  {spell.getComponents()}  •  {spell.duration?.toString()} </Text>
       </Group>
       <Group>
-        <Text className='spellDescriptionShort'>{spell.description}</Text>
+        <Text size='xs' className='spellDescriptionShort'>{spell.description}</Text>
       </Group>
       <Box
         bg={spell.castTime?.color()}

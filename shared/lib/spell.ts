@@ -76,6 +76,14 @@ export class Spell {
     if (this.material) { components = components + " M";}
     return components;
   }
+
+  getComponentsShort(): string {
+    var components: string = "";
+    if (this.verbal) { components = components + "V";}
+    if (this.somatic) { components = components + "S";}
+    if (this.material) { components = components + "M";}
+    return components;
+  }
 }
 
 export function buildClassArray(rawSpell: any): string[] {
@@ -188,20 +196,25 @@ export class SpellRange {
 
   toString(): string 
   {
-    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit();
+    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit(false);
   }
 
-  printUnit(): string
+  toStringShort(): string
+  {
+    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit(true);
+  }
+
+  printUnit(short: boolean): string
   {
     switch (this.unit) {
       case rangeUnit.feet:
-        return this.plural ? "Feet" : "Foot";
+        return short ? "Ft" : this.plural ? "Feet" : "Foot";
       case rangeUnit.miles:
-        return this.plural ? "Miles" : "Mile";
+        return short ? "Mi" : this.plural ? "Miles" : "Mile";
       case rangeUnit.self:
-        return "Self";
+        return short ? "S" : "Self";
       case rangeUnit.touch:
-        return "Touch";
+        return short ? "T" : "Touch";
     }
   }
 }

@@ -1,23 +1,20 @@
-'use client';
-
-import { Group, SegmentedControl } from '@mantine/core';
+import { Select } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
 import { spellLevel } from '@/shared/lib/spell';
 
 type spellLevelSelectorType = {
   onClick: Function;
   selectedLevel: string;
-  visibleFrom: string;
+  hiddenFrom: string;
 };
 
-export function SpellLevelSelector(props: spellLevelSelectorType) {
-  function spellLevelSelectHandler(value: string) {
+export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
+  function spellLevelSelectHandler(value: string | null) {
     props.onClick(value);
   }
 
   return (
-    <Group justify="center" visibleFrom={props.visibleFrom}>
-      <SegmentedControl
+      <Select
         value={props.selectedLevel}
         defaultValue="All"
         onChange={spellLevelSelectHandler}
@@ -25,10 +22,10 @@ export function SpellLevelSelector(props: spellLevelSelectorType) {
         radius="md"
         size="md"
         color="#364fc7"
+        hiddenFrom={props.hiddenFrom}
         data={Object.keys(spellLevel).map(function (key) {
           return spellLevel[key];
         })}
       />
-    </Group>
   );
 }

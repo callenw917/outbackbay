@@ -13,7 +13,7 @@ type SpellCardProps = {
 export function SpellCardSmall(props: SpellCardProps) {
   var spell: Spell = props.spell;
   var castTime: SpellTime | undefined = spell.castTime as SpellTime | undefined;
-  var castingTime = castTime instanceof SpellTime ? castTime.toStringShort() : null;
+  var castingTime = castTime instanceof SpellTime ? castTime.toString() : null;
 
   return (
     <Paper
@@ -27,33 +27,35 @@ export function SpellCardSmall(props: SpellCardProps) {
         props.onClick(spell);
       }}
     >
-      <Group justify="space-between">
-        <Title order={6}>{spell.name}</Title>
-        <Group gap="xs">
-          {spell.requiresConc && (
-            <Badge className={classes.badge} size="sm" color="yellow">
-              C
-            </Badge>
-          )}
-          {spell.isRitual && (
-            <Badge className={classes.badge} size="sm" color="indigo">
-              R
-            </Badge>
-          )}
-          {castingTime && (
-            <Badge className={classes.badge} size="sm" color={castTime?.color()}>
-              {castingTime}
-            </Badge>
-          )}
-        </Group>
+      
+      <Group gap='xs' wrap='nowrap'>
+        <Title order={6} className='smallCardh1'>{spell.name}</Title>
+        <Text c='gray.6' size='xs' truncate='end' className='smallCardh2'>{spell.range?.toString()}  •  {spell.getComponentsShort()}  •  {spell.duration?.toStringShort()} </Text>
+      </Group>
+      <Group gap="xs" className='smallCardTags'>
+        {castingTime && (
+          <Badge className={classes.badge} size="sm" color={castTime?.color()}>
+            {castingTime}
+          </Badge>
+        )}
+        {spell.requiresConc && (
+          <Badge className={classes.badge} size="sm" color="yellow">
+            Conc
+          </Badge>
+        )}
+        {spell.isRitual && (
+          <Badge className={classes.badge} size="sm" color="indigo">
+            Ritual
+          </Badge>
+        )}
       </Group>
       <Box
         bg={castTime?.color()}
-        pos={'relative'}
+        pos={'absolute'}
         left={'-12px'}
         w={'calc(100% + 24px)'}
         h={'6px'}
-        bottom={'-12px'}
+        bottom={'0px'}
       ></Box>
     </Paper>
   );

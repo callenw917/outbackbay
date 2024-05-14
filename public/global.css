@@ -44,7 +44,8 @@
 
 .spellCardSmall
 {
-    min-width: 20em;
+    width: 20em;
+    position: relative;
 }
 
 .spellCardLarge
@@ -54,6 +55,20 @@
     position: relative;
 }
 
+.smallCardh1
+{
+    flex-shrink: 0;
+}
+
+.smallCardh2
+{
+    flex-shrink: 1;
+}
+
+.smallCardTags
+{
+    padding-top: 10px;
+}
 
 .header
 {
@@ -62,4 +77,8 @@
     padding-left: 0.5em;
     border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
     background-color: #dbe4ff;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 100;
 }

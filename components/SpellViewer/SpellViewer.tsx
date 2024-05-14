@@ -2,6 +2,7 @@
 
 //#region imports
 import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
+import { SpellLevelSelectorSmall } from '@/components/SpellLevelSelector/SpellLevelSelectorSmall';
 import { SpellCardSmall } from '@/components/SpellCard/Small/SpellCardSmall';
 import '@/public/global.css';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
@@ -50,6 +51,7 @@ export default function SpellPage(props: spellViewerProps) {
 
   function levelFilterChangeHandler(selectedLevel: string) {
     setSelectedLevel(selectedLevel);
+    window.scrollTo(0,0); // Scroll to the top of the page when a spell level is changed
   }
 
   function cardViewChangeHandler(selectedView: string) {
@@ -113,7 +115,8 @@ export default function SpellPage(props: spellViewerProps) {
       <div className="mainArea">
         <Group wrap="nowrap" align="flex-start" className="header">
           <ClassSelectDropdown onClick={classFilterChangeHandler} selectedClass={selectedClass} />
-          <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} />
+          <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} visibleFrom="sm" />
+          <SpellLevelSelectorSmall onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} hiddenFrom="sm" />
           <CardViewSelector onClick={cardViewChangeHandler} selectedView={selectedView} />
         </Group>
         <div className="spellCardArea">
