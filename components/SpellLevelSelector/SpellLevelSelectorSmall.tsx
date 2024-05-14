@@ -20,7 +20,7 @@ export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
         onChange={spellLevelSelectHandler}
         classNames={classes}
         radius="md"
-        size="md"
+        size="sm"
         color="#364fc7"
         hiddenFrom={props.hiddenFrom}
         data={Object.keys(spellLevel).map(function (key) {

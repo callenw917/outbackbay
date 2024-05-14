@@ -113,7 +113,7 @@ export default function SpellPage(props: spellViewerProps) {
   return (
     <>
       <div className="mainArea">
-        <Group wrap="nowrap" align="flex-start" className="header">
+        <Group wrap="nowrap" align="center" className="header" justify='space-between'>
           <ClassSelectDropdown onClick={classFilterChangeHandler} selectedClass={selectedClass} />
           <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} visibleFrom="sm" />
           <SpellLevelSelectorSmall onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} hiddenFrom="sm" />

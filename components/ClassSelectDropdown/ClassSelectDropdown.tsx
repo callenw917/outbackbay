@@ -25,7 +25,7 @@ export function ClassSelectDropdown(props: classSelectDropdownProps) {
       value={props.selectedClass}
       onChange={onClassChange}
       classNames={classes}
-      radius="xl"
+      radius="md"
     />
   );
 }
