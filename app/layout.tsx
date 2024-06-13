@@ -2,6 +2,7 @@ import '@mantine/core/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
+import '../public/global.css';
 
 export const metadata = {
   title: 'Outback Bay',

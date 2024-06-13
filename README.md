@@ -44,7 +44,7 @@ Each commit should run an auto redeploy
 [Prisma](https://www.prisma.io/docs/getting-started) is an ORM (Object Relational Mapper) tool that maps your database schema to typescript Objects. In this project it is used to interface with a [postgres database](https://vercel.com/callens-projects-7eb10345/outbackbay/stores/postgres/store_xyk8UdT5cudU509C/data)
 
 The `schema.prisma` file is how you define table/object relationships. It also includes database connection strings
-Any time this file is changed, run `npx prisma db push` to create the new tables and `npx prisma generate` to create update the client
+Any time this file is changed, run `npm exec prisma migrate dev` to create update the client
 To open the dbms, run `npx prisma studio`
 Run `npx prisma db seed` to populate data from seed.ts
 
