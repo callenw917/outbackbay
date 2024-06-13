@@ -1,9 +1,8 @@
 'use client';
 
-import { Badge, Group, Paper, Title, Box, Center, Text } from '@mantine/core';
+import { Group, Paper, Title, Box, Center, Text, HoverCard } from '@mantine/core';
 import classes from './SpellCardLarge.module.css';
-import { Spell, SpellTime } from '@/shared/lib/spell';
-import { Span } from 'next/dist/trace';
+import { Spell } from '@/shared/lib/spell';
 
 type SpellCardProps = {
   spell: Spell;
@@ -12,6 +11,12 @@ type SpellCardProps = {
 
 export function SpellCardLarge(props: SpellCardProps) {
   var spell: Spell = props.spell;
+  var spellComponents = spell.components;
+  if (spellComponents)
+  {
+    spellComponents = spellComponents.replace(/[()]/g, '');
+    spellComponents =  spellComponents.charAt(0).toUpperCase() + spellComponents.slice(1);
+  }
 
   return (
     <Paper
@@ -45,8 +50,23 @@ export function SpellCardLarge(props: SpellCardProps) {
           )} */}
         </Group>
       </Center>
-      <Group justify='center' c='gray.6'>
-          <Text>{spell.castTime?.toString()}  •  {spell.range?.toString()}  •  {spell.getComponents()}  •  {spell.duration?.toString()} </Text>
+      <Group justify='center' c='gray.6' gap='xs'>
+          <Text span size='sm'>{spell.castTime?.toString()}</Text>
+          <Text span size='sm'>•</Text>
+          <Text span size='sm'>{spell.range?.toString()}</Text>
+          <Text span size='sm'>•</Text>
+          <HoverCard shadow='md'>
+            <HoverCard.Target>
+              <Text span size='sm'>{spell.getComponents()}</Text>
+            </HoverCard.Target>
+            {spellComponents && (
+            <HoverCard.Dropdown>
+              <Text>{spellComponents}</Text>
+            </HoverCard.Dropdown>
+            )}
+          </HoverCard>
+          <Text span size='sm'>•</Text>
+          <Text span size='sm'>{spell.duration?.toString()}</Text>
       </Group>
       <Group>
         <Text size='xs' className='spellDescriptionShort'>{spell.description}</Text>

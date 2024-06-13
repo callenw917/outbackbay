@@ -1,4 +1,6 @@
 import SpellViewer from '@/components/SpellViewer/SpellViewer';
+import { SignIn } from '@/components/UserManagement/SignIn';
+import UserAvatar from '@/components/UserAvatar';
 
 async function getSpells() {
   var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
@@ -16,9 +18,11 @@ async function getSpells() {
 export default async function SpellPage() {
   const rawSpells = await getSpells();
   return (
-    <>
-      <SpellViewer rawSpells={rawSpells}></SpellViewer>;
-    </>
+      <>
+        <SpellViewer rawSpells={rawSpells}>
+          <UserAvatar></UserAvatar>
+        </SpellViewer>
+      </>
   );
 }
 
