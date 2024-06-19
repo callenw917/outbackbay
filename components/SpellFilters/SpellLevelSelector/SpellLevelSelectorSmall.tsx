@@ -24,6 +24,7 @@ export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
   return (
     <Select
       value={spellFiltering.selectedLevel}
+      label="Level"
       defaultValue="All"
       onChange={spellLevelSelectHandler}
       classNames={classes}

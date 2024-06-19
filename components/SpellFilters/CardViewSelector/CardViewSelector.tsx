@@ -23,6 +23,7 @@ export function CardViewSelector() {
       data={Object.keys(cardViews).map(function (key) {
         return cardViews[key];
       })}
+      label="Card View"
       defaultValue={cardViews.smallCard}
       value={spellFiltering.selectedView}
       onChange={onViewChange}

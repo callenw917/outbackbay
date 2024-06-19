@@ -21,6 +21,7 @@ export function ClassSelectDropdown() {
   return (
     <Select
       placeholder="Pick value"
+      label="Class"
       data={Object.keys(playerClass).map(function (key) {
         return playerClass[key];
       })}

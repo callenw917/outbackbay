@@ -1,0 +1,31 @@
+.tray {
+  position: fixed;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  left: 0;
+  padding: 0 1rem;
+  width: 20rem;
+  margin-top: rem(40px);
+  background-color: var(--mantine-color-blue-light);
+}
+
+/* Filler div is used to push main content to the right of the fixed div */
+.trayFiller {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-right: 20rem; /* Same width as tray */
+  margin-top: rem(40px);
+}
+
+.filterButton {
+  position: fixed;
+  top: 5em;
+  left: -1em;
+
+  .icon {
+    margin-left: 20px;
+  }
+}

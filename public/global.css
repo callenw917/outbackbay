@@ -1,96 +1,81 @@
-body
-{
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.mainArea 
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.mainArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: rem(40px);
 }
 
-.appArea
-{
-    padding-top: 6em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.spellCardArea {
+  bottom: 0;
+  padding: 0% 10%;
+  overflow-y: scroll;
 }
 
-.spellCardArea
-{
-    width: 100%;
-    top: 50px;
-    bottom: 0;
-    padding: 0% 10%;
-    position: absolute;
-    overflow-y: scroll;
+.appArea {
+  padding-top: 6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.spellGroup
-{
-    /* flex parent styles */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 1em;
+.spellGroup {
+  /* flex parent styles */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1em;
 
-    /* flex child styles */
-    flex: 0 0 30em; 
+  /* flex child styles */
+  flex: 0 0 30em;
 
-    padding-top: 50px;
-    padding-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.spellGroup .title
-{
-    flex-basis: 100%;
+.spellGroup .title {
+  flex-basis: 100%;
 }
 
-.spellCardSmall
-{
-    width: 20em;
-    position: relative;
+.spellCardSmall {
+  width: 20em;
+  position: relative;
 }
 
-.spellCardLarge
-{
-    width: 20em;
-    height: 20em;
-    position: relative;
+.spellCardLarge {
+  width: 20em;
+  height: 20em;
+  position: relative;
 }
 
-.smallCardh1
-{
-    flex-shrink: 0;
+.smallCardh1 {
+  flex-shrink: 0;
 }
 
-.smallCardh2
-{
-    flex-shrink: 1;
+.smallCardh2 {
+  flex-shrink: 1;
 }
 
-.smallCardTags
-{
-    padding-top: 10px;
+.smallCardTags {
+  padding-top: 10px;
 }
 
-.header
-{
-    width: 100%;
-    align-items: center;
-    padding-left: 0.5em;
-    border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-    background-color: #dbe4ff;
-    position: fixed;
-    width: 100%;
-    top: 0px;
-    z-index: 100;
+.header {
+  width: 100%;
+  align-items: center;
+  padding-left: 0.5em;
+  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  background-color: #dbe4ff;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 100;
 }

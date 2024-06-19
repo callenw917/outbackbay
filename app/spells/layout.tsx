@@ -1,9 +1,13 @@
+import Header from '@/components/Header/Header';
 import StateProvider from './state-provider';
 
 export default function RootLayout({ children }: { children: any }) {
   return (
     <>
-      <StateProvider>{children}</StateProvider>
+      <StateProvider>
+        <Header></Header>
+        {children}
+      </StateProvider>
     </>
   );
 }
