@@ -1,5 +1,6 @@
 
 import { signIn } from "@/auth"
+import { Button } from "@mantine/core";
  
 export type signInProps = {};
 
@@ -11,7 +12,7 @@ export function SignIn(props: signInProps) {
         await signIn("google", { redirectTo: "/spells" })
       }}
     >
-      <button type="submit">Signin with Google</button>
+      <Button color="blue" radius="md" type="submit" m='xs'>Sign In</Button>
     </form>
   )
 } 

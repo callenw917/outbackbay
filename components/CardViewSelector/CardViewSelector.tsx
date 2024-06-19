@@ -1,16 +1,17 @@
+'use client';
+
 import { Select } from '@mantine/core';
 import classes from './CardViewSelector.module.css';
 import { cardViews } from '@/shared/lib/spell';
+import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import { useContext } from 'react';
 
-type cardViewSelectorProps = {
-  onClick: Function;
-  selectedView: string;
-};
+export function CardViewSelector() {
+  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
 
-export function CardViewSelector(props: cardViewSelectorProps) {
   function onViewChange(chosenView: string | null) {
     if (chosenView) {
-      props.onClick(chosenView);
+      setSpellFiltering({type: 'setSelectedView', value: chosenView});
     }
   }
 
@@ -20,7 +21,7 @@ export function CardViewSelector(props: cardViewSelectorProps) {
         return cardViews[key];
       })}
       defaultValue={cardViews.smallCard}
-      value={props.selectedView}
+      value={spellFiltering.selectedView}
       onChange={onViewChange}
       classNames={classes}
       radius="md"

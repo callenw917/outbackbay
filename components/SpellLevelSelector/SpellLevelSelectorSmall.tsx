@@ -1,21 +1,26 @@
+'use client';
+
 import { Select } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
 import { spellLevel } from '@/shared/lib/spell';
+import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import { useContext } from 'react';
 
 type spellLevelSelectorType = {
-  onClick: Function;
-  selectedLevel: string;
   hiddenFrom: string;
 };
 
 export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
+  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
+
   function spellLevelSelectHandler(value: string | null) {
-    props.onClick(value);
+    setSpellFiltering({type: 'setSelectedLevel', value: value});
+    window.scrollTo(0, 0);
   }
 
   return (
       <Select
-        value={props.selectedLevel}
+        value={spellFiltering.selectedLevel}
         defaultValue="All"
         onChange={spellLevelSelectHandler}
         classNames={classes}

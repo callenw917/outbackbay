@@ -45,6 +45,34 @@ model Spell {
     sorcerer            Boolean
     warlock             Boolean
     wizard              Boolean
+    characters          CharacterSpells[]
+}
+
+
+model Character {
+    id          String  @default(cuid()) @id
+    name        String
+    class       String
+    level       Int
+    spells      CharacterSpells[]
+    users       UserCharacters[]
+}
+
+model CharacterSpells {
+    id          String  @default(cuid()) @id
+    character   Character @relation(fields: [characterId], references: [id])
+    characterId String
+    spell       Spell @relation(fields: [spellId], references: [id])
+    spellId     String
+}
+
+model UserCharacters {
+    id          String  @default(cuid()) @id
+    user        User @relation(fields: [userId], references: [id])
+    userId      String
+    character   Character @relation(fields: [characterId], references: [id])
+    characterId String
+    isOwner     Boolean
 }
 
 model User {
@@ -57,6 +85,7 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  Characters    UserCharacters[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

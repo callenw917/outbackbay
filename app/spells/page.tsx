@@ -1,6 +1,15 @@
+import { auth } from '@/auth';
+import { CardViewSelector } from '@/components/CardViewSelector/CardViewSelector';
+import { ClassSelectDropdown } from '@/components/ClassSelectDropdown/ClassSelectDropdown';
+import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
+import { SpellLevelSelectorSmall } from '@/components/SpellLevelSelector/SpellLevelSelectorSmall';
 import SpellViewer from '@/components/SpellViewer/SpellViewer';
-import { SignIn } from '@/components/UserManagement/SignIn';
 import UserAvatar from '@/components/UserAvatar';
+import { SignIn } from '@/components/UserManagement/SignIn';
+import { SignOut } from '@/components/UserManagement/SignOut';
+import UserMenu from '@/components/UserManagement/UserMenu';
+import { ActionIcon, Button, Group } from '@mantine/core';
+import { IconUser } from '@tabler/icons-react';
 
 async function getSpells() {
   var spellJson = await fetch(process.env.NEXT_PUBLIC_URL + '/api/get-spells', {
@@ -8,20 +17,32 @@ async function getSpells() {
     headers: {
       Accept: 'application/json',
     },
-    // next: {
-    //   revalidate: 5,
-    // },
   });
   return spellJson.json();
 }
 
 export default async function SpellPage() {
   const rawSpells = await getSpells();
+  const session = await auth();
   return (
       <>
-        <SpellViewer rawSpells={rawSpells}>
-          <UserAvatar></UserAvatar>
-        </SpellViewer>
+        <Group wrap="nowrap" align="center" className="header" justify='space-between'>
+          <Group wrap="nowrap" align='center'>
+            <ClassSelectDropdown/>
+            <SpellLevelSelector visibleFrom="sm" />
+            <SpellLevelSelectorSmall hiddenFrom="sm" />
+            <CardViewSelector/>
+          </Group>
+          <Group>
+            {!session?.user ? 
+              <SignIn></SignIn> :
+              <UserMenu>
+                <SignOut></SignOut>
+              </UserMenu>
+            }
+          </Group>
+        </Group>
+        <SpellViewer rawSpells={rawSpells}></SpellViewer>
       </>
   );
 }

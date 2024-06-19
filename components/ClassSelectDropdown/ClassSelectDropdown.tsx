@@ -1,17 +1,17 @@
+'use client';
+
 import { playerClass } from '@/shared/lib/spell';
 import { Select } from '@mantine/core';
-import { useState } from 'react';
+import { useContext } from 'react';
 import classes from './ClassSelectDropdown.module.css';
+import { SpellFilterContext } from '@/app/spells/state-provider';
 
-type classSelectDropdownProps = {
-  onClick: Function;
-  selectedClass: string;
-};
+export function ClassSelectDropdown() {
+  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: any, setSpellFiltering: Function};
 
-export function ClassSelectDropdown(props: classSelectDropdownProps) {
   function onClassChange(chosenClass: string | null) {
     if (chosenClass) {
-      props.onClick(chosenClass);
+      setSpellFiltering({type: 'setSelectedClass', value: chosenClass});
     }
   }
 
@@ -22,7 +22,7 @@ export function ClassSelectDropdown(props: classSelectDropdownProps) {
         return playerClass[key];
       })}
       defaultValue="Wizard"
-      value={props.selectedClass}
+      value={spellFiltering.selectedClass}
       onChange={onClassChange}
       classNames={classes}
       radius="md"

@@ -1,7 +1,9 @@
+import StateProvider from "./state-provider";
+
 export default function RootLayout({ children }: { children: any }) {
     return (
         <>
-          {children}
+          <StateProvider>{children}</StateProvider>
         </>
     );
   }

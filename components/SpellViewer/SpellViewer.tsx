@@ -1,35 +1,30 @@
 'use client';
 
 //#region imports
-import { SpellLevelSelector } from '@/components/SpellLevelSelector/SpellLevelSelector';
-import { SpellLevelSelectorSmall } from '@/components/SpellLevelSelector/SpellLevelSelectorSmall';
 import { SpellCardSmall } from '@/components/SpellCard/Small/SpellCardSmall';
 import { SpellGroup } from '@/components/SpellGroup/SpellGroup';
-import { ClassSelectDropdown } from '@/components/ClassSelectDropdown/ClassSelectDropdown';
 import {
   Spell,
   SpellRange,
   SpellTime,
   buildClassArray,
   cardViews,
-  playerClass,
   rangeUnit,
   rangeUnitMap,
   spellLevel,
   spellTimeMap,
   timeUnit,
 } from '@/shared/lib/spell';
-import { ComponentType, use, useState } from 'react';
+import { useContext, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
-import { Button, Group } from '@mantine/core';
 import { SpellCardDetailedView } from '@/components/SpellCardDetailedView/SpellCardDetailedView';
-import { CardViewSelector } from '../CardViewSelector/CardViewSelector';
 import { SpellCardLarge } from '../SpellCard/Large/SpellCardLarge';
+import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import React from 'react';
 //#endregion
 
 type spellViewerProps = {
   rawSpells: Spell[];
-  children: any;
 };
 
 var spellToOpen: Spell;
@@ -37,9 +32,7 @@ var spellLevels: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function SpellPage(props: spellViewerProps) {
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState(spellLevel.all);
-  const [selectedClass, setSelectedClass] = useState(playerClass.wizard);
-  const [selectedView, setSelectedView] = useState(cardViews.smallCard);
+  const {spellFiltering, setSpellFiltering} = React.useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
 
   function closeDetailedViewHandler() {
     setDetailedCardVisible(false);
@@ -49,22 +42,6 @@ export default function SpellPage(props: spellViewerProps) {
   function openDetailedViewHandler(selectedSpell: Spell) {
     setDetailedCardVisible(true);
     spellToOpen = selectedSpell;
-  }
-
-  // Filter the spells by level
-  function levelFilterChangeHandler(selectedLevel: string) {
-    setSelectedLevel(selectedLevel);
-    window.scrollTo(0,0); // Scroll to the top of the page when a spell level is changed
-  }
-
-  // Filter the spells by class
-  function classFilterChangeHandler(selectedClass: string) {
-    setSelectedClass(selectedClass);
-  }
-
-  // Change the view of the spell cards
-  function cardViewChangeHandler(selectedView: string) {
-    setSelectedView(selectedView);
   }
 
   var spells: Spell[] = [];
@@ -119,26 +96,18 @@ export default function SpellPage(props: spellViewerProps) {
   return (
     <>
       <div className="mainArea">
-        <Group wrap="nowrap" align="center" className="header" justify='space-between'>
-          {props.children}
-          <ClassSelectDropdown onClick={classFilterChangeHandler} selectedClass={selectedClass} />
-          <SpellLevelSelector onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} visibleFrom="sm" />
-          <SpellLevelSelectorSmall onClick={levelFilterChangeHandler} selectedLevel={selectedLevel} hiddenFrom="sm" />
-          <CardViewSelector onClick={cardViewChangeHandler} selectedView={selectedView} />
-          <Button color="blue" radius="md" component="a" href="/spells/login">Sign In</Button>
-        </Group>
         <div className="spellCardArea">
           {spellLevels.map((level: number) => (
-            (selectedLevel == spellLevel.all || selectedLevel == level.toString()) && (
+            (spellFiltering.selectedLevel == spellLevel.all || spellFiltering.selectedLevel == level.toString()) && (
             <SpellGroup spellLevel={level.toString()}>
-              {getSortedSpells(spells, level, selectedClass).map((spell: Spell) => (
+              {getSortedSpells(spells, level, spellFiltering.selectedClass).map((spell: Spell) => (
                 <>
-                  {selectedView == cardViews.smallCard && <SpellCardSmall
+                  {spellFiltering.selectedView == cardViews.smallCard && <SpellCardSmall
                     key={spell.id}
                     spell={spell as Spell}
                     onClick={openDetailedViewHandler}
                   />}
-                  {selectedView == cardViews.largeCard && <SpellCardLarge 
+                  {spellFiltering.selectedView == cardViews.largeCard && <SpellCardLarge 
                     key={spell.id}
                     spell={spell as Spell}
                     onClick={openDetailedViewHandler}

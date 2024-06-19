@@ -55,11 +55,14 @@ async function main()
     const records = csv_parse.parse(fileContent, options, (error: any, result: any) => {
         if (error) {console.log(error);}
     });
+    console.log('Done');
 
-    console.log('Creating the records');
+    // Create Spell Records
+    console.log('Creating Spell records');
     await prisma.spell.createMany({
         data: records
     });
+    console.log('Done');
 }
 
 main().then(async () => {
