@@ -11,10 +11,13 @@ type spellLevelSelectorType = {
 };
 
 export function SpellLevelSelector(props: spellLevelSelectorType) {
-  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
+  const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
+    spellFiltering: StateObject;
+    setSpellFiltering: Function;
+  };
 
   function spellLevelSelectHandler(value: string) {
-    setSpellFiltering({type: 'setSelectedLevel', value: value});
+    setSpellFiltering({ type: 'setSelectedLevel', value: value });
     window.scrollTo(0, 0);
   }
 

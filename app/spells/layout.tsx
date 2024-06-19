@@ -1,9 +1,9 @@
-import StateProvider from "./state-provider";
+import StateProvider from './state-provider';
 
 export default function RootLayout({ children }: { children: any }) {
-    return (
-        <>
-          <StateProvider>{children}</StateProvider>
-        </>
-    );
-  }
+  return (
+    <>
+      <StateProvider>{children}</StateProvider>
+    </>
+  );
+}

@@ -25,25 +25,26 @@ export default async function SpellPage() {
   const rawSpells = await getSpells();
   const session = await auth();
   return (
-      <>
-        <Group wrap="nowrap" align="center" className="header" justify='space-between'>
-          <Group wrap="nowrap" align='center'>
-            <ClassSelectDropdown/>
-            <SpellLevelSelector visibleFrom="sm" />
-            <SpellLevelSelectorSmall hiddenFrom="sm" />
-            <CardViewSelector/>
-          </Group>
-          <Group>
-            {!session?.user ? 
-              <SignIn></SignIn> :
-              <UserMenu>
-                <SignOut></SignOut>
-              </UserMenu>
-            }
-          </Group>
+    <>
+      <Group wrap="nowrap" align="center" className="header" justify="space-between">
+        <Group wrap="nowrap" align="center">
+          <ClassSelectDropdown />
+          <SpellLevelSelector visibleFrom="sm" />
+          <SpellLevelSelectorSmall hiddenFrom="sm" />
+          <CardViewSelector />
         </Group>
-        <SpellViewer rawSpells={rawSpells}></SpellViewer>
-      </>
+        <Group>
+          {!session?.user ? (
+            <SignIn></SignIn>
+          ) : (
+            <UserMenu>
+              <SignOut></SignOut>
+            </UserMenu>
+          )}
+        </Group>
+      </Group>
+      <SpellViewer rawSpells={rawSpells}></SpellViewer>
+    </>
   );
 }
 

@@ -12,10 +12,9 @@ type SpellCardProps = {
 export function SpellCardLarge(props: SpellCardProps) {
   var spell: Spell = props.spell;
   var spellComponents = spell.components;
-  if (spellComponents)
-  {
+  if (spellComponents) {
     spellComponents = spellComponents.replace(/[()]/g, '');
-    spellComponents =  spellComponents.charAt(0).toUpperCase() + spellComponents.slice(1);
+    spellComponents = spellComponents.charAt(0).toUpperCase() + spellComponents.slice(1);
   }
 
   return (
@@ -31,7 +30,7 @@ export function SpellCardLarge(props: SpellCardProps) {
       }}
     >
       <Center>
-        <Title order={4} >{spell.name}</Title>
+        <Title order={4}>{spell.name}</Title>
         <Group gap="xs">
           {/* {spell.requiresConc && (
             <Badge className={classes.badge} size="sm" color="yellow">
@@ -50,26 +49,42 @@ export function SpellCardLarge(props: SpellCardProps) {
           )} */}
         </Group>
       </Center>
-      <Group justify='center' c='gray.6' gap='xs'>
-          <Text span size='sm'>{spell.castTime?.toString()}</Text>
-          <Text span size='sm'>•</Text>
-          <Text span size='sm'>{spell.range?.toString()}</Text>
-          <Text span size='sm'>•</Text>
-          <HoverCard shadow='md'>
-            <HoverCard.Target>
-              <Text span size='sm'>{spell.getComponents()}</Text>
-            </HoverCard.Target>
-            {spellComponents && (
+      <Group justify="center" c="gray.6" gap="xs">
+        <Text span size="sm">
+          {spell.castTime?.toString()}
+        </Text>
+        <Text span size="sm">
+          •
+        </Text>
+        <Text span size="sm">
+          {spell.range?.toString()}
+        </Text>
+        <Text span size="sm">
+          •
+        </Text>
+        <HoverCard shadow="md">
+          <HoverCard.Target>
+            <Text span size="sm">
+              {spell.getComponents()}
+            </Text>
+          </HoverCard.Target>
+          {spellComponents && (
             <HoverCard.Dropdown>
               <Text>{spellComponents}</Text>
             </HoverCard.Dropdown>
-            )}
-          </HoverCard>
-          <Text span size='sm'>•</Text>
-          <Text span size='sm'>{spell.duration?.toString()}</Text>
+          )}
+        </HoverCard>
+        <Text span size="sm">
+          •
+        </Text>
+        <Text span size="sm">
+          {spell.duration?.toString()}
+        </Text>
       </Group>
       <Group>
-        <Text size='xs' className='spellDescriptionShort'>{spell.description}</Text>
+        <Text size="xs" className="spellDescriptionShort">
+          {spell.description}
+        </Text>
       </Group>
       <Box
         bg={spell.castTime?.color()}

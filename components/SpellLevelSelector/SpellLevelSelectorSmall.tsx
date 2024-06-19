@@ -11,26 +11,29 @@ type spellLevelSelectorType = {
 };
 
 export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
-  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
+  const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
+    spellFiltering: StateObject;
+    setSpellFiltering: Function;
+  };
 
   function spellLevelSelectHandler(value: string | null) {
-    setSpellFiltering({type: 'setSelectedLevel', value: value});
+    setSpellFiltering({ type: 'setSelectedLevel', value: value });
     window.scrollTo(0, 0);
   }
 
   return (
-      <Select
-        value={spellFiltering.selectedLevel}
-        defaultValue="All"
-        onChange={spellLevelSelectHandler}
-        classNames={classes}
-        radius="md"
-        size="sm"
-        color="#364fc7"
-        hiddenFrom={props.hiddenFrom}
-        data={Object.keys(spellLevel).map(function (key) {
-          return spellLevel[key];
-        })}
-      />
+    <Select
+      value={spellFiltering.selectedLevel}
+      defaultValue="All"
+      onChange={spellLevelSelectHandler}
+      classNames={classes}
+      radius="md"
+      size="sm"
+      color="#364fc7"
+      hiddenFrom={props.hiddenFrom}
+      data={Object.keys(spellLevel).map(function (key) {
+        return spellLevel[key];
+      })}
+    />
   );
 }

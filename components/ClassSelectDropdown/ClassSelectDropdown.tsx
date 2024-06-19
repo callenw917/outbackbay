@@ -7,11 +7,14 @@ import classes from './ClassSelectDropdown.module.css';
 import { SpellFilterContext } from '@/app/spells/state-provider';
 
 export function ClassSelectDropdown() {
-  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: any, setSpellFiltering: Function};
+  const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
+    spellFiltering: any;
+    setSpellFiltering: Function;
+  };
 
   function onClassChange(chosenClass: string | null) {
     if (chosenClass) {
-      setSpellFiltering({type: 'setSelectedClass', value: chosenClass});
+      setSpellFiltering({ type: 'setSelectedClass', value: chosenClass });
     }
   }
 

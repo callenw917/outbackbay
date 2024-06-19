@@ -27,12 +27,16 @@ export function SpellCardSmall(props: SpellCardProps) {
         props.onClick(spell);
       }}
     >
-      
-      <Group gap='xs' wrap='nowrap'>
-        <Title order={6} className='smallCardh1'>{spell.name}</Title>
-        <Text c='gray.6' size='xs' truncate='end' className='smallCardh2'>{spell.range?.toString()}  •  {spell.getComponentsShort()}  •  {spell.duration?.toStringShort()} </Text>
+      <Group gap="xs" wrap="nowrap">
+        <Title order={6} className="smallCardh1">
+          {spell.name}
+        </Title>
+        <Text c="gray.6" size="xs" truncate="end" className="smallCardh2">
+          {spell.range?.toString()} • {spell.getComponentsShort()} •{' '}
+          {spell.duration?.toStringShort()}{' '}
+        </Text>
       </Group>
-      <Group gap="xs" className='smallCardTags'>
+      <Group gap="xs" className="smallCardTags">
         {castingTime && (
           <Badge className={classes.badge} size="sm" color={castTime?.color()}>
             {castingTime}

@@ -7,11 +7,14 @@ import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
 export function CardViewSelector() {
-  const {spellFiltering, setSpellFiltering} = useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
+  const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
+    spellFiltering: StateObject;
+    setSpellFiltering: Function;
+  };
 
   function onViewChange(chosenView: string | null) {
     if (chosenView) {
-      setSpellFiltering({type: 'setSelectedView', value: chosenView});
+      setSpellFiltering({ type: 'setSelectedView', value: chosenView });
     }
   }
 

@@ -6,7 +6,7 @@ import '../public/global.css';
 
 export const metadata = {
   title: 'Outback Bay',
-  description: 'Where the \'back meets the bay',
+  description: "Where the 'back meets the bay",
 };
 
 export default function RootLayout({ children }: { children: any }) {

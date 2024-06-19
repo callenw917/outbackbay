@@ -32,7 +32,10 @@ var spellLevels: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function SpellPage(props: spellViewerProps) {
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
-  const {spellFiltering, setSpellFiltering} = React.useContext(SpellFilterContext) as {spellFiltering: StateObject, setSpellFiltering: Function};
+  const { spellFiltering, setSpellFiltering } = React.useContext(SpellFilterContext) as {
+    spellFiltering: StateObject;
+    setSpellFiltering: Function;
+  };
 
   function closeDetailedViewHandler() {
     setDetailedCardVisible(false);
@@ -50,7 +53,7 @@ export default function SpellPage(props: spellViewerProps) {
   props.rawSpells.forEach((rawSpell: any) => {
     var classArray: string[] = buildClassArray(rawSpell);
     var castTime: SpellTime | undefined = undefined;
-    if (rawSpell.casting_time_amount && rawSpell.casting_time_unit) { 
+    if (rawSpell.casting_time_amount && rawSpell.casting_time_unit) {
       castTime = new SpellTime(
         rawSpell.casting_time_amount,
         spellTimeMap.get(rawSpell.casting_time_unit) || timeUnit.special
@@ -97,25 +100,34 @@ export default function SpellPage(props: spellViewerProps) {
     <>
       <div className="mainArea">
         <div className="spellCardArea">
-          {spellLevels.map((level: number) => (
-            (spellFiltering.selectedLevel == spellLevel.all || spellFiltering.selectedLevel == level.toString()) && (
-            <SpellGroup spellLevel={level.toString()}>
-              {getSortedSpells(spells, level, spellFiltering.selectedClass).map((spell: Spell) => (
-                <>
-                  {spellFiltering.selectedView == cardViews.smallCard && <SpellCardSmall
-                    key={spell.id}
-                    spell={spell as Spell}
-                    onClick={openDetailedViewHandler}
-                  />}
-                  {spellFiltering.selectedView == cardViews.largeCard && <SpellCardLarge 
-                    key={spell.id}
-                    spell={spell as Spell}
-                    onClick={openDetailedViewHandler}
-                  />}
-                </>
-              ))}
-            </SpellGroup>
-          )))}
+          {spellLevels.map(
+            (level: number) =>
+              (spellFiltering.selectedLevel == spellLevel.all ||
+                spellFiltering.selectedLevel == level.toString()) && (
+                <SpellGroup spellLevel={level.toString()}>
+                  {getSortedSpells(spells, level, spellFiltering.selectedClass).map(
+                    (spell: Spell) => (
+                      <>
+                        {spellFiltering.selectedView == cardViews.smallCard && (
+                          <SpellCardSmall
+                            key={spell.id}
+                            spell={spell as Spell}
+                            onClick={openDetailedViewHandler}
+                          />
+                        )}
+                        {spellFiltering.selectedView == cardViews.largeCard && (
+                          <SpellCardLarge
+                            key={spell.id}
+                            spell={spell as Spell}
+                            onClick={openDetailedViewHandler}
+                          />
+                        )}
+                      </>
+                    )
+                  )}
+                </SpellGroup>
+              )
+          )}
         </div>
       </div>
       <SpellCardDetailedView

@@ -47,7 +47,7 @@ export class Spell {
     range?: SpellRange,
     components?: string,
     duration?: SpellTime,
-    damageType?: string,
+    damageType?: string
   ) {
     this.id = id;
     this.name = name;
@@ -70,18 +70,30 @@ export class Spell {
   }
 
   getComponents(): string {
-    var components: string = "";
-    if (this.verbal) { components = components + "V";}
-    if (this.somatic) { components = components + " S";}
-    if (this.material) { components = components + " M";}
+    var components: string = '';
+    if (this.verbal) {
+      components = components + 'V';
+    }
+    if (this.somatic) {
+      components = components + ' S';
+    }
+    if (this.material) {
+      components = components + ' M';
+    }
     return components;
   }
 
   getComponentsShort(): string {
-    var components: string = "";
-    if (this.verbal) { components = components + "V";}
-    if (this.somatic) { components = components + "S";}
-    if (this.material) { components = components + "M";}
+    var components: string = '';
+    if (this.verbal) {
+      components = components + 'V';
+    }
+    if (this.somatic) {
+      components = components + 'S';
+    }
+    if (this.material) {
+      components = components + 'M';
+    }
     return components;
   }
 }
@@ -191,30 +203,27 @@ export class SpellRange {
     this.amount = amount;
     this.unit = unit;
     this.plural = amount > 1;
-    this.needsUnit = (this.unit == rangeUnit.feet || this.unit == rangeUnit.miles);
+    this.needsUnit = this.unit == rangeUnit.feet || this.unit == rangeUnit.miles;
   }
 
-  toString(): string 
-  {
-    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit(false);
+  toString(): string {
+    return (this.needsUnit ? this.amount.toString() + ' ' : '') + this.printUnit(false);
   }
 
-  toStringShort(): string
-  {
-    return (this.needsUnit ? (this.amount.toString() + ' ') : ('')) + this.printUnit(true);
+  toStringShort(): string {
+    return (this.needsUnit ? this.amount.toString() + ' ' : '') + this.printUnit(true);
   }
 
-  printUnit(short: boolean): string
-  {
+  printUnit(short: boolean): string {
     switch (this.unit) {
       case rangeUnit.feet:
-        return short ? "Ft" : this.plural ? "Feet" : "Foot";
+        return short ? 'Ft' : this.plural ? 'Feet' : 'Foot';
       case rangeUnit.miles:
-        return short ? "Mi" : this.plural ? "Miles" : "Mile";
+        return short ? 'Mi' : this.plural ? 'Miles' : 'Mile';
       case rangeUnit.self:
-        return short ? "S" : "Self";
+        return short ? 'S' : 'Self';
       case rangeUnit.touch:
-        return short ? "T" : "Touch";
+        return short ? 'T' : 'Touch';
     }
   }
 }
@@ -223,7 +232,7 @@ export enum rangeUnit {
   feet,
   miles,
   self,
-  touch
+  touch,
 }
 
 export const rangeUnitMap = new Map<string, rangeUnit>([
@@ -322,8 +331,8 @@ export const playerClass: { [key: string]: string } = {
   wizard: 'Wizard',
 };
 
-export const cardViews : { [key: string]: string} = {
+export const cardViews: { [key: string]: string } = {
   smallCard: 'Small Card',
   largeCard: 'Large Card',
   list: 'List',
-}
+};

@@ -1,18 +1,19 @@
+import { signIn } from '@/auth';
+import { Button } from '@mantine/core';
 
-import { signIn } from "@/auth"
-import { Button } from "@mantine/core";
- 
 export type signInProps = {};
 
 export function SignIn(props: signInProps) {
   return (
     <form
       action={async () => {
-        "use server"
-        await signIn("google", { redirectTo: "/spells" })
+        'use server';
+        await signIn('google', { redirectTo: '/spells' });
       }}
     >
-      <Button color="blue" radius="md" type="submit" m='xs'>Sign In</Button>
+      <Button color="blue" radius="md" type="submit" m="xs">
+        Sign In
+      </Button>
     </form>
-  )
-} 
+  );
+}
