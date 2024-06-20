@@ -19,7 +19,7 @@ body {
 
 .spellCardArea {
   bottom: 0;
-  padding: 0% 10%;
+  padding: 0% 8%;
   overflow-y: scroll;
 }
 
@@ -43,8 +43,15 @@ body {
   /* flex child styles */
   flex: 0 0 30em;
 
-  padding-top: 50px;
+  padding: 20px;
+  padding-top: 20px;
   padding-bottom: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.14);
 }
 
 .spellGroup .title {
