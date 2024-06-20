@@ -8,6 +8,11 @@
   margin-top: rem(40px);
   background-color: #f8f9fa;
   z-index: 10;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
   animation: trayClosing 0.5s forwards;
 }
 
@@ -22,6 +27,11 @@
   margin-top: rem(40px);
   background-color: #f8f9fa;
   z-index: 10;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
   animation: trayOpening 0.5s forwards;
 }
 
@@ -33,6 +43,7 @@
   height: 100%;
   padding-right: 0rem; /* Same width as tray */
   margin-top: rem(40px);
+
   animation: fillerOpening 0.5s forwards;
 }
 .trayFillerClosed {
@@ -42,6 +53,7 @@
   height: 100%;
   padding-right: 20rem; /* Same width as tray */
   margin-top: rem(40px);
+
   animation: fillerClosing 0.5s forwards;
 }
 
@@ -49,6 +61,11 @@
   position: fixed;
   top: 5em;
   left: -1em;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+
   animation: buttonClosing 0.5s forwards;
 
   .icon {
@@ -60,6 +77,11 @@
   position: fixed;
   top: 5em;
   left: -1em;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+
   animation: buttonOpening 0.5s forwards;
 
   .icon {
