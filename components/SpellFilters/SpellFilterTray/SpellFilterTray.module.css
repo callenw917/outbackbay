@@ -1,4 +1,17 @@
-.tray {
+.trayClosed {
+  position: fixed;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  left: 0;
+  width: 20rem;
+  margin-top: rem(40px);
+  background-color: #f8f9fa;
+  z-index: 10;
+  animation: trayClosing 0.5s forwards;
+}
+
+.trayOpened {
   position: fixed;
   flex-direction: column;
   justify-content: space-between;
@@ -7,25 +20,107 @@
   padding: 0 1rem;
   width: 20rem;
   margin-top: rem(40px);
-  background-color: var(--mantine-color-blue-light);
+  background-color: #f8f9fa;
+  z-index: 10;
+  animation: trayOpening 0.5s forwards;
 }
 
 /* Filler div is used to push main content to the right of the fixed div */
-.trayFiller {
+.trayFillerOpened {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-right: 0rem; /* Same width as tray */
+  margin-top: rem(40px);
+  animation: fillerOpening 0.5s forwards;
+}
+.trayFillerClosed {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   padding-right: 20rem; /* Same width as tray */
   margin-top: rem(40px);
+  animation: fillerClosing 0.5s forwards;
 }
 
-.filterButton {
+.filterButtonOpen {
   position: fixed;
   top: 5em;
   left: -1em;
+  animation: buttonClosing 0.5s forwards;
 
   .icon {
-    margin-left: 20px;
+    margin-left: 14px;
+  }
+}
+
+.filterButtonClose {
+  position: fixed;
+  top: 5em;
+  left: -1em;
+  animation: buttonOpening 0.5s forwards;
+
+  .icon {
+    margin-left: 14px;
+  }
+}
+
+@keyframes trayOpening {
+  0% {
+    left: -20rem;
+  }
+  100% {
+    left: 0rem;
+  }
+}
+
+@keyframes trayClosing {
+  0% {
+    left: 0rem;
+  }
+  99% {
+    left: -20rem;
+  }
+  100% {
+    left: -20rem;
+    display: none;
+  }
+}
+
+@keyframes buttonOpening {
+  0% {
+    left: -1em;
+  }
+  100% {
+    left: 19em;
+  }
+}
+
+@keyframes buttonClosing {
+  0% {
+    left: 19em;
+  }
+  100% {
+    left: -1em;
+  }
+}
+
+@keyframes fillerOpening {
+  0% {
+    padding-right: 0rem;
+  }
+  100% {
+    padding-right: 20rem;
+  }
+}
+
+@keyframes fillerClosing {
+  0% {
+    padding-right: 20rem;
+  }
+  100% {
+    padding-right: 0rem;
   }
 }

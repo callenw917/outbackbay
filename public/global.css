@@ -1,3 +1,8 @@
+:root {
+  --animation-time: 0.5s;
+  --animation-type: ease;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,6 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: rem(40px);
+  transition: width 0.5s;
 }
 
 .spellCardArea {
