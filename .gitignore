@@ -132,3 +132,7 @@ dist
 .DS_Store
 .vercel
 .env*.local
+
+#dangerous route
+app/api/delete-all-characters/
+app/api/delete-all-characters/route.ts

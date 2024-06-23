@@ -16,6 +16,11 @@
   animation: trayClosing 0.5s forwards;
 }
 
+.trayClosedNoAnimation {
+  visibility: hidden;
+  display: none;
+}
+
 .trayOpened {
   position: fixed;
   flex-direction: column;
@@ -41,6 +46,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 0px;
   padding-right: 0rem; /* Same width as tray */
   margin-top: rem(40px);
 
@@ -51,10 +57,21 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 0px;
   padding-right: 20rem; /* Same width as tray */
   margin-top: rem(40px);
 
   animation: fillerClosing 0.5s forwards;
+}
+
+.trayFillerClosedNoAnimation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 0px;
+  padding-right: 0rem; /* Same width as tray */
+  margin-top: rem(40px);
 }
 
 .filterButtonOpen {
@@ -67,6 +84,20 @@
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
   animation: buttonClosing 0.5s forwards;
+
+  .icon {
+    margin-left: 14px;
+  }
+}
+
+.filterButtonOpenNoAnimation {
+  position: fixed;
+  top: 5em;
+  left: -1em;
+
+  border-style: solid;
+  border: black 2px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
   .icon {
     margin-left: 14px;

@@ -2,7 +2,7 @@
 
 import { Select } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
-import { spellLevel } from '@/shared/lib/spell';
+import { spellLevelEnum, supportedSpellLevels } from '@/shared/lib/spell';
 import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
@@ -25,15 +25,15 @@ export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
     <Select
       value={spellFiltering.selectedLevel}
       label="Level"
-      defaultValue="All"
+      defaultValue={supportedSpellLevels.get(spellLevelEnum.all)?.toString()}
       onChange={spellLevelSelectHandler}
       classNames={classes}
       radius="md"
       size="sm"
       color="#364fc7"
       hiddenFrom={props.hiddenFrom}
-      data={Object.keys(spellLevel).map(function (key) {
-        return spellLevel[key];
+      data={Array.from(supportedSpellLevels.values()).map(function (level) {
+        return level.toString();
       })}
     />
   );

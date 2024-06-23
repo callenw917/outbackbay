@@ -1,8 +1,10 @@
+'use server';
+
 import { signOut } from '@/auth';
 
 export type signInProps = {};
 
-export function SignOut(props: signInProps) {
+export async function SignOut(props: signInProps) {
   return (
     <form
       action={async () => {

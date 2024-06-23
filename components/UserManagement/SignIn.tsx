@@ -1,9 +1,11 @@
+'use server';
+
 import { signIn } from '@/auth';
 import { Button } from '@mantine/core';
 
 export type signInProps = {};
 
-export function SignIn(props: signInProps) {
+export async function SignIn(props: signInProps) {
   return (
     <form
       action={async () => {

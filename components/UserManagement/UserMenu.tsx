@@ -8,9 +8,9 @@ export default function UserMenu({ children }: { children: any }) {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <ActionIcon
-          variant="gradient"
+          variant="subtle"
           m="5px"
-          size="xl"
+          size="lg"
           gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
         >
           <IconUser></IconUser>

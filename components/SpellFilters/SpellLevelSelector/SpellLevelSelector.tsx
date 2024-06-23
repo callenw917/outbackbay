@@ -2,7 +2,7 @@
 
 import { Group, SegmentedControl } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
-import { spellLevel } from '@/shared/lib/spell';
+import { supportedSpellLevels, SpellLevel } from '@/shared/lib/spell';
 import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
@@ -31,8 +31,8 @@ export function SpellLevelSelector(props: spellLevelSelectorType) {
         radius="md"
         size="md"
         color="#364fc7"
-        data={Object.keys(spellLevel).map(function (key) {
-          return spellLevel[key];
+        data={Array.from(supportedSpellLevels).map(function ([spellLevelEnum, level]) {
+          return level.toString();
         })}
       />
     </Group>

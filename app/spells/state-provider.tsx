@@ -1,6 +1,6 @@
 'use client';
 
-import { cardViews, playerClass, spellLevel } from '@/shared/lib/spell';
+import { cardViews, playerClass, spellLevelEnum, supportedSpellLevels } from '@/shared/lib/spell';
 import { createContext, useReducer } from 'react';
 
 export interface StateObject {
@@ -11,7 +11,7 @@ export interface StateObject {
 
 const initialState: StateObject = {
   selectedClass: playerClass.wizard,
-  selectedLevel: spellLevel.all,
+  selectedLevel: supportedSpellLevels.get(spellLevelEnum.all)?.toString() as string,
   selectedView: cardViews.smallCard,
 };
 

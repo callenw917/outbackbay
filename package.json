@@ -21,6 +21,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
     "@mantine/core": "7.2.2",
+    "@mantine/form": "^7.10.2",
     "@mantine/hooks": "7.2.2",
     "@next/bundle-analyzer": "^14.0.1",
     "@prisma/client": "^5.15.0",

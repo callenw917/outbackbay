@@ -10,10 +10,19 @@ import { CardViewSelector } from '../CardViewSelector/CardViewSelector';
 
 export default function SpellFilterTray() {
   const [isOpen, setIsOpen] = useState(false);
+  const [everOpen, setEverOpen] = useState(false);
 
   return (
     <>
-      <div className={isOpen ? classes.trayOpened : classes.trayClosed}>
+      <div
+        className={
+          isOpen
+            ? classes.trayOpened
+            : everOpen
+              ? classes.trayClosed
+              : classes.trayClosedNoAnimation
+        }
+      >
         <h2>Filters</h2>
         <Stack>
           <ClassSelectDropdown />
@@ -22,12 +31,25 @@ export default function SpellFilterTray() {
         </Stack>
       </div>
       <ActionIcon
-        className={isOpen ? classes.filterButtonClose : classes.filterButtonOpen}
+        className={
+          isOpen
+            ? classes.filterButtonClose
+            : everOpen
+              ? classes.filterButtonOpen
+              : classes.filterButtonOpenNoAnimation
+        }
         variant="light"
         w={'70px'}
         h={'50px'}
         radius="lg"
-        onClick={isOpen ? () => setIsOpen(false) : () => setIsOpen(true)}
+        onClick={
+          isOpen
+            ? () => setIsOpen(false)
+            : () => {
+                setIsOpen(true);
+                setEverOpen(true);
+              }
+        }
       >
         {isOpen ? (
           <IconSquareX size={32} className={classes.icon} />
@@ -37,8 +59,10 @@ export default function SpellFilterTray() {
       </ActionIcon>
       {isOpen ? (
         <div className={classes.trayFillerOpened}></div>
-      ) : (
+      ) : everOpen ? (
         <div className={classes.trayFillerClosed}></div>
+      ) : (
+        <div className={classes.trayFillerClosedNoAnimation}></div>
       )}
     </>
   );
