@@ -55,7 +55,7 @@ export default function SpellPage({ rawSpells }: spellViewerProps) {
                 supportedSpellLevels.get(spellLevelEnum.all)?.toString() ||
                 spellFiltering.selectedLevel == level.toString()) &&
               level.level != -1 && (
-                <SpellGroup spellLevel={level.toString()}>
+                <SpellGroup spellLevel={level.toString()} key={level.toString()}>
                   {getSortedSpells(spells, level, spellFiltering.selectedClass).map(
                     (spell: Spell) => (
                       <>

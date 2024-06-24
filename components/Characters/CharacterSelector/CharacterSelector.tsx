@@ -5,7 +5,6 @@ import { useForm } from '@mantine/form';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { createCharacter } from '@/app/actions';
-import { getCharactersForUser } from '@/components/Header/Header';
 import { Character } from '@/shared/lib/character';
 
 type CharacterSelectorProps = {
@@ -111,4 +110,16 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
       </Modal>
     </>
   );
+}
+
+export async function getCharactersForUser(userId: string) {
+  const rawCharacters = await fetch(process.env.NEXT_PUBLIC_URL + `/api/characters/${userId}`).then(
+    (res) => res.json()
+  );
+
+  var characters = rawCharacters.map((character: any) => {
+    return new Character(character.id, character.name, character.level, character.class);
+  });
+
+  return characters;
 }
