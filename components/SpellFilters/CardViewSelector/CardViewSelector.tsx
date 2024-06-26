@@ -3,12 +3,12 @@
 import { Select } from '@mantine/core';
 import classes from './CardViewSelector.module.css';
 import { cardViews } from '@/shared/lib/spell';
-import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
 export function CardViewSelector() {
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
-    spellFiltering: StateObject;
+    spellFiltering: FilterStateObject;
     setSpellFiltering: Function;
   };
 

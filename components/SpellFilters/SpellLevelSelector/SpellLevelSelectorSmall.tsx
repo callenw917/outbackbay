@@ -3,7 +3,7 @@
 import { Select } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
 import { spellLevelEnum, supportedSpellLevels } from '@/shared/lib/spell';
-import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
 type spellLevelSelectorType = {
@@ -12,7 +12,7 @@ type spellLevelSelectorType = {
 
 export function SpellLevelSelectorSmall(props: spellLevelSelectorType) {
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
-    spellFiltering: StateObject;
+    spellFiltering: FilterStateObject;
     setSpellFiltering: Function;
   };
 

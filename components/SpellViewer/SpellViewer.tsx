@@ -11,11 +11,16 @@ import {
   spellLevelEnum,
   supportedSpellLevels,
 } from '@/shared/lib/spell';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
 import { SpellCardDetailedView } from '@/components/SpellCardDetailedView/SpellCardDetailedView';
 import { SpellCardLarge } from '../SpellCard/Large/SpellCardLarge';
-import { SpellFilterContext, StateObject } from '@/app/spells/state-provider';
+import {
+  SpellFilterContext,
+  FilterStateObject,
+  spellSearchContext,
+  SpellSearchStateObject,
+} from '@/app/spells/state-provider';
 import React from 'react';
 //#endregion
 
@@ -27,9 +32,13 @@ var spellToOpen: Spell;
 
 export default function SpellPage({ rawSpells }: spellViewerProps) {
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
-  const { spellFiltering, setSpellFiltering } = React.useContext(SpellFilterContext) as {
-    spellFiltering: StateObject;
+  const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
+    spellFiltering: FilterStateObject;
     setSpellFiltering: Function;
+  };
+  const { spellSearch, setSpellSearch } = useContext(spellSearchContext) as {
+    spellSearch: SpellSearchStateObject;
+    setSpellSearch: Function;
   };
 
   function closeDetailedViewHandler() {
@@ -44,6 +53,12 @@ export default function SpellPage({ rawSpells }: spellViewerProps) {
 
   // Build the spell objects from the raw data
   var spells = buildSpellObjects(rawSpells);
+
+  if (spellSearch.searchTerm != '') {
+    spells = spells.filter((spell) =>
+      spell.name.toLowerCase().includes(spellSearch.searchTerm.toLowerCase())
+    );
+  }
 
   return (
     <>
