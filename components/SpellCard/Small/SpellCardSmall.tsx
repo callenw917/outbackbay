@@ -1,9 +1,11 @@
 'use client';
 
-import { Badge, Group, Paper, Text, Title, Box } from '@mantine/core';
+import { Badge, Group, Paper, Text, Title, Box, Button } from '@mantine/core';
 import classes from './SpellCardSmall.module.css';
 import { Spell, SpellTime, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
 import { MouseEventHandler } from 'react';
+import { IconPlus } from '@tabler/icons-react';
+import SpellContextMenu from '../SpellContextMenu/SpellContextMenu';
 
 type SpellCardProps = {
   spell: Spell;
@@ -18,6 +20,7 @@ export function SpellCardSmall(props: SpellCardProps) {
   return (
     <Paper
       withBorder
+      pos={'relative'}
       shadow="sm"
       radius="md"
       p="sm"
@@ -61,6 +64,7 @@ export function SpellCardSmall(props: SpellCardProps) {
         h={'6px'}
         bottom={'0px'}
       ></Box>
+      <SpellContextMenu />
     </Paper>
   );
 }

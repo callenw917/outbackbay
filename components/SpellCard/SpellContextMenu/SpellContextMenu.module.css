@@ -1,0 +1,14 @@
+.hoverButton:hover {
+  background-color: var(--mantine-color-green-6);
+  border-color: var(--mantine-color-green-6);
+
+  .hoverButtonIcon {
+    fill: white;
+    stroke: white;
+  }
+}
+
+.hoverButtonIcon {
+  height: 16px;
+  width: 16px;
+}

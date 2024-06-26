@@ -65,6 +65,35 @@ body {
   position: relative;
 }
 
+.spellContextButton {
+  position: absolute;
+  top: 8px; /* Adjust as needed */
+  right: 8px; /* Adjust as needed */
+  display: none; /* Initially hidden */
+  height: 20px;
+  width: 20px;
+  padding: 0px;
+}
+
+.spellCardSmall:hover .spellContextButton {
+  display: block; /* Show button on hover */
+}
+
+.spellContextButton:hover {
+  background-color: var(--mantine-color-green-6);
+  border-color: var(--mantine-color-green-6);
+
+  .spellContextButtonIcon {
+    fill: white;
+    stroke: white;
+  }
+}
+
+.spellContextButtonIcon {
+  height: 16px;
+  width: 16px;
+}
+
 .spellCardLarge {
   width: 20em;
   height: 20em;
