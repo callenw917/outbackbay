@@ -1,71 +1,71 @@
 // schema.prisma
 
 generator client {
-    provider = "prisma-client-js"
-    engineType = "library"
+  provider = "prisma-client-js"
+  engineType = "library"
 }
 
 datasource db {
-    provider = "postgresql"
-    url = env("DATABASE_URL") // uses connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "postgresql"
+  url = env("DATABASE_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Spell {
-    id                  String  @default(cuid()) @id
-    name                String
-    level               Int
-    school              String
-    casting_time_amount Int
-    casting_time_unit   String
-    duration_amount     Int
-    duration_unit       String
-    range_amount        Int
-    range_unit          String
-    area_type           String?
-    area_amount         Int?
-    area_unit           String?
-    attack              String
-    save                String
-    damage_or_effect    String
-    ritual              Boolean
-    concentration       Boolean
-    verbal              Boolean
-    somatic             Boolean
-    material            Boolean
-    material_object     String
-    source              String
-    details             String
-    link                String
-    artificer           Boolean
-    bard                Boolean
-    cleric              Boolean
-    druid               Boolean
-    paladin             Boolean
-    ranger              Boolean
-    sorcerer            Boolean
-    warlock             Boolean
-    wizard              Boolean
-    characters          CharacterSpells[]
+  id                  Int  @default(autoincrement()) @id
+  name                String
+  level               Int
+  school              String
+  casting_time_amount Int
+  casting_time_unit   String
+  duration_amount     Int
+  duration_unit       String
+  range_amount        Int
+  range_unit          String
+  area_type           String?
+  area_amount         Int?
+  area_unit           String?
+  attack              String
+  save                String
+  damage_or_effect    String
+  ritual              Boolean
+  concentration       Boolean
+  verbal              Boolean
+  somatic             Boolean
+  material            Boolean
+  material_object     String
+  source              String
+  details             String
+  link                String
+  artificer           Boolean
+  bard                Boolean
+  cleric              Boolean
+  druid               Boolean
+  paladin             Boolean
+  ranger              Boolean
+  sorcerer            Boolean
+  warlock             Boolean
+  wizard              Boolean
+  characters          CharacterSpells[]
 }
 
-
 model Character {
-    id          Int  @default(autoincrement()) @id
-    name        String
-    class       String
-    level       Int
-    spells      CharacterSpells[]
-    user        User @relation(fields: [userId], references: [id])
-    userId      String
+  id          Int  @default(autoincrement()) @id
+  name        String
+  class       String
+  level       Int
+  spells      CharacterSpells[]
+  user        User? @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model CharacterSpells {
-    id          Int  @default(autoincrement()) @id
-    character   Character @relation(fields: [characterId], references: [id])
-    characterId Int
-    spell       Spell @relation(fields: [spellId], references: [id])
-    spellId     String
+  id          Int  @default(autoincrement()) @id
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int
+  spell       Spell @relation(fields: [spellId], references: [id])
+  spellId     Int
+  prepared    Boolean
 }
 
 model User {

@@ -9,7 +9,9 @@ async function main() {
   var path = require('path');
 
   console.log('Deleting existing data...');
+  await prisma.characterSpells.deleteMany();
   await prisma.spell.deleteMany();
+  await prisma.character.deleteMany();
   console.log('Done');
 
   const options = {
@@ -98,6 +100,57 @@ async function main() {
     data: records,
   });
   console.log('Done');
+
+  console.log('Seeding characters...');
+  const createdCharacter = await prisma.character.create({
+    data: {
+      name: 'Pyr-Kana',
+      class: 'Wizard',
+      level: 14,
+    },
+  });
+  console.log('Done');
+
+  console.log("Seeding characters' spells...");
+  await prisma.characterSpells.createMany({
+    data: [
+      {
+        characterId: createdCharacter.id,
+        spellId: await getSpellIdByName('Fireball'),
+        prepared: true,
+      },
+      {
+        characterId: createdCharacter.id,
+        spellId: await getSpellIdByName('Burning Hands'),
+        prepared: true,
+      },
+      {
+        characterId: createdCharacter.id,
+        spellId: await getSpellIdByName('Flaming Sphere'),
+        prepared: true,
+      },
+      {
+        characterId: createdCharacter.id,
+        spellId: await getSpellIdByName('Wall of Fire'),
+        prepared: false,
+      },
+      {
+        characterId: createdCharacter.id,
+        spellId: await getSpellIdByName('Delayed Blast Fireball'),
+        prepared: false,
+      },
+    ],
+  });
+  console.log('Done');
+}
+
+async function getSpellIdByName(name: string) {
+  const spell = await prisma.spell.findFirst({
+    where: {
+      name: name,
+    },
+  });
+  return spell.id;
 }
 
 main()

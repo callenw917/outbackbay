@@ -31,6 +31,7 @@ This template comes with the following features:
 2. Run `yarn install` to install the packages
 
 ### Vercel
+
 [Vercel](https://vercel.com) is used to manage the deployment of next.js apps. [Vercel CLI](https://vercel.com/docs/cli) is used to manage this deployment via the commandline
 
 1. Run `npm i -g vercel` to install vercel
@@ -41,15 +42,23 @@ This template comes with the following features:
 Each commit should run an auto redeploy
 
 ## Prisma
+
 [Prisma](https://www.prisma.io/docs/getting-started) is an ORM (Object Relational Mapper) tool that maps your database schema to typescript Objects. In this project it is used to interface with a [postgres database](https://vercel.com/callens-projects-7eb10345/outbackbay/stores/postgres/store_xyk8UdT5cudU509C/data)
 
 The `schema.prisma` file is how you define table/object relationships. It also includes database connection strings
 Any time this file is changed, run `npm exec prisma migrate dev` to create update the client
+
+If you find yourself running into issues, try the following:
+
+- Rename .env.local. to just .env
+- Run `npx prisma generate` to establish a link between schema.prisma and the env.local file.
+
 To open the dbms, run `npx prisma studio`
 Run `npx prisma db seed` to populate data from seed.ts
 
 ## npm scripts
-*Start each command with `npm run`*
+
+_Start each command with `npm run`_
 
 ### Build and dev scripts
 
