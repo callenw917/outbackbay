@@ -4,6 +4,7 @@ import { ActionIcon, Button, Group, Modal, NumberInput, Select, TextInput } from
 import { useForm } from '@mantine/form';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { createCharacter } from '@/app/actions';
 import { Character } from '@/shared/lib/character';
 
@@ -14,6 +15,7 @@ type CharacterSelectorProps = {
 export default function CharacterSelector({ userId }: CharacterSelectorProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [characters, setCharacters] = useState<Character[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     if (userId) {
@@ -57,6 +59,12 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
     });
   };
 
+  const handleCharacterSelect = (value: string | null) => {
+    if (!value) return;
+    const characterId = value.split('[')[1].split(']')[0];
+    router.push(`spells/character/${characterId}`);
+  };
+
   const characterNames = characters.map(
     (character: Character) => character.name + ' [' + character.id + ']'
   );
@@ -65,7 +73,11 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
 
   return (
     <>
-      <Select data={characterNames} placeholder="Select Character" />
+      <Select
+        data={characterNames}
+        placeholder="Select Character"
+        onChange={handleCharacterSelect}
+      />
       <ActionIcon variant="subtle" size="lg" onClick={() => setModalOpen(true)}>
         <IconPlus></IconPlus>
       </ActionIcon>
