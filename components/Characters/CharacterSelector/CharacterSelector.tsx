@@ -6,7 +6,7 @@ import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createCharacter } from '@/app/actions';
-import { Character } from '@/shared/lib/character';
+import { Character } from '@/shared/lib/Character';
 
 type CharacterSelectorProps = {
   userId: string | undefined;
@@ -62,7 +62,7 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
   const handleCharacterSelect = (value: string | null) => {
     if (!value) return;
     const characterId = value.split('[')[1].split(']')[0];
-    router.push(`spells/character/${characterId}`);
+    router.push(`/spells/character/${characterId}`);
   };
 
   const characterNames = characters.map(

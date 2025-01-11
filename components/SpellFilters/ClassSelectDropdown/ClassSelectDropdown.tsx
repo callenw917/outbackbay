@@ -1,6 +1,6 @@
 'use client';
 
-import { playerClass } from '@/shared/lib/spell';
+import { playerClass } from '@/shared/lib/Spell';
 import { Select } from '@mantine/core';
 import { useContext } from 'react';
 import classes from './ClassSelectDropdown.module.css';

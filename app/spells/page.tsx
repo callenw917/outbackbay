@@ -1,3 +1,4 @@
+import SpellFilterPill from '@/components/SpellFilters/SpellFilterPill/SpellFilterPill';
 import SpellFilterTray from '@/components/SpellFilters/SpellFilterTray/SpellFilterTray';
 import SpellViewer from '@/components/SpellViewer/SpellViewer';
 import { Group } from '@mantine/core';
@@ -17,10 +18,10 @@ export default async function SpellPage() {
 
   return (
     <>
-      <Group justify="space-between" align="flex-start" preventGrowOverflow={false} wrap="nowrap">
-        <SpellFilterTray></SpellFilterTray>
+      <div className="mainArea">
+        <SpellFilterPill></SpellFilterPill>
         <SpellViewer rawSpells={rawSpells}></SpellViewer>
-      </Group>
+      </div>
     </>
   );
 }

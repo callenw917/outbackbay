@@ -7,7 +7,7 @@ import { SignOut } from '../UserManagement/SignOut';
 import UserMenu from '../UserManagement/UserMenu';
 import { auth } from '@/auth';
 import CharacterSelector from '../Characters/CharacterSelector/CharacterSelector';
-import { Character } from '@/shared/lib/character';
+import { Character } from '@/shared/lib/Character';
 import SpellSearch from '../SpellSearch/SpellSearch';
 
 export default async function Header() {

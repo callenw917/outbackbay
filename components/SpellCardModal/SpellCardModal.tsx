@@ -1,4 +1,4 @@
-import { Spell } from '@/shared/lib/spell';
+import { Spell } from '@/shared/lib/Spell';
 import { Modal, Button } from '@mantine/core';
 
 type detailedViewType = {
@@ -7,7 +7,7 @@ type detailedViewType = {
   close: Function;
 };
 
-export function SpellCardDetailedView(props: detailedViewType) {
+export function SpellCardModal(props: detailedViewType) {
   //Search for and split 'At higher levels'
   var description = props.spell?.description;
   var higherLevelDesc;

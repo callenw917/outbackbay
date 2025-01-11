@@ -2,7 +2,7 @@
 
 import { Select } from '@mantine/core';
 import classes from './CardViewSelector.module.css';
-import { cardViews } from '@/shared/lib/spell';
+import { cardViews } from '@/shared/lib/Spell';
 import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 
@@ -23,7 +23,6 @@ export function CardViewSelector() {
       data={Object.keys(cardViews).map(function (key) {
         return cardViews[key];
       })}
-      label="Card View"
       defaultValue={cardViews.smallCard}
       value={spellFiltering.selectedView}
       onChange={onViewChange}

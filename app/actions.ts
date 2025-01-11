@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { Character } from '@/shared/lib/character';
+import { Character } from '@/shared/lib/Character';
 
 export type createCharacterProps = {
   name: string;

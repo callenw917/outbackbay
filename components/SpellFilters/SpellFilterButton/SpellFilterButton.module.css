@@ -1,0 +1,18 @@
+.root {
+  --chip-size: 40px;
+  --chip-icon-size: 0px;
+  --chip-checked-padding: 8px !important;
+  --chip-padding: 8px !important;
+  --chip-radius: 10px !important;
+}
+
+.iconWrapper {
+  height: 0;
+  width: 0;
+}
+
+.label:not([data-checked]) {
+  background-color: white !important;
+  border-color: var(--chip-bg);
+  color: var(--chip-bg);
+}

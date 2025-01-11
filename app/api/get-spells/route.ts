@@ -1,4 +1,4 @@
-import { Spell, playerClass, SpellTime, timeUnit } from '@/shared/lib/spell';
+import { Spell, playerClass, SpellTime, timeUnit } from '@/shared/lib/Spell';
 import prisma from '@/lib/prisma';
 
 export async function GET(request: Request) {

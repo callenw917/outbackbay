@@ -1,0 +1,27 @@
+.spellGroup {
+  /* flex parent styles */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1em;
+
+  /* flex child styles */
+  flex: 0 0 30em;
+
+  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  border-style: solid;
+  border: black 2px;
+  background-color: white;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  flex-basis: 100%;
+}

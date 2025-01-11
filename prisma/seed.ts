@@ -112,34 +112,49 @@ async function main() {
   console.log('Done');
 
   console.log("Seeding characters' spells...");
+
+  const preparedSpells = [
+    'Mage Hand',
+    'Mind Sliver',
+    'Minor Illusion',
+    'Fire Bolt',
+    'Shocking Grasp',
+    'Mage Armor',
+    'Shield',
+    'Chromatic Orb',
+    'Mirror Image',
+    'Misty Step',
+    'Blindness/Deafness',
+    'Counterspell',
+    'Dispel Magic',
+    'Slow',
+    'Banishment',
+    'Dimension Door',
+    'Arcane Eye',
+    'Wall of Force',
+    "Bigby's Hand",
+    'Telekinesis',
+    'Globe of Invulnerability',
+    'Contingency',
+    'Reverse Gravity',
+    'Teleport',
+  ];
+
+  const characterId = createdCharacter.id;
+
+  const spellData = await Promise.all(
+    preparedSpells.map(async (spellName) => {
+      const spellId = await getSpellIdByName(spellName);
+      return {
+        characterId: characterId,
+        spellId: spellId,
+        prepared: true,
+      };
+    })
+  );
+
   await prisma.characterSpells.createMany({
-    data: [
-      {
-        characterId: createdCharacter.id,
-        spellId: await getSpellIdByName('Fireball'),
-        prepared: true,
-      },
-      {
-        characterId: createdCharacter.id,
-        spellId: await getSpellIdByName('Burning Hands'),
-        prepared: true,
-      },
-      {
-        characterId: createdCharacter.id,
-        spellId: await getSpellIdByName('Flaming Sphere'),
-        prepared: true,
-      },
-      {
-        characterId: createdCharacter.id,
-        spellId: await getSpellIdByName('Wall of Fire'),
-        prepared: false,
-      },
-      {
-        characterId: createdCharacter.id,
-        spellId: await getSpellIdByName('Delayed Blast Fireball'),
-        prepared: false,
-      },
-    ],
+    data: spellData,
   });
   console.log('Done');
 }
@@ -150,6 +165,9 @@ async function getSpellIdByName(name: string) {
       name: name,
     },
   });
+  if (!spell) {
+    throw new Error(`Spell with name ${name} not found`);
+  }
   return spell.id;
 }
 

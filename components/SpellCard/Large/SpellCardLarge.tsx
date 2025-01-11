@@ -2,7 +2,7 @@
 
 import { Group, Paper, Title, Box, Center, Text, HoverCard } from '@mantine/core';
 import classes from './SpellCardLarge.module.css';
-import { Spell } from '@/shared/lib/spell';
+import { Spell } from '@/shared/lib/Spell';
 
 type SpellCardProps = {
   spell: Spell;

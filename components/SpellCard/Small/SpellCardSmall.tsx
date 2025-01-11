@@ -2,7 +2,7 @@
 
 import { Badge, Group, Paper, Text, Title, Box, Button } from '@mantine/core';
 import classes from './SpellCardSmall.module.css';
-import { Spell, SpellTime, target, timeUnit, rangeUnit } from '@/shared/lib/spell';
+import { Spell, SpellTime, target, timeUnit, rangeUnit } from '@/shared/lib/Spell';
 import { MouseEventHandler } from 'react';
 import { IconPlus } from '@tabler/icons-react';
 import SpellContextMenu from '../SpellContextMenu/SpellContextMenu';

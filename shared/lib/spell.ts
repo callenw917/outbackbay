@@ -306,6 +306,18 @@ export class SpellTime {
     }
     return 'green';
   }
+
+  isAction(): boolean {
+    return this.unit == timeUnit.action;
+  }
+
+  isBonusAction(): boolean {
+    return this.unit == timeUnit.bonusAction;
+  }
+
+  isReaction(): boolean {
+    return this.unit == timeUnit.reaction;
+  }
 }
 
 /**
@@ -379,13 +391,13 @@ export class SpellLevel {
     this.level = level;
     switch (level) {
       case -1:
-        this.name = 'All';
+        this.name = 'All Levels';
         break;
       case 0:
         this.name = 'Cantrip';
         break;
       default:
-        this.name = 'Level ' + level;
+        this.name = level.toString();
     }
   }
 
