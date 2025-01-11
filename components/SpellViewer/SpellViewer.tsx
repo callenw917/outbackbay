@@ -77,11 +77,12 @@ export default function SpellViewer({ rawSpells }: spellViewerProps) {
   return (
     <>
       <div className="spellCardArea">
-        {Array.from(spellGroupsToDisplay.values()).map(
+        {Array.from(supportedSpellLevels.values()).map(
           (level) =>
             (spellFiltering.selectedLevel ==
               supportedSpellLevels.get(spellLevelEnum.all)?.toString() ||
               spellFiltering.selectedLevel == level.toString()) &&
+            addedSpellLevels.has(level.level) &&
             level.level != -1 && (
               <SpellGroupNarrow spellLevel={level.toString()} key={level.toString()}>
                 {getSortedSpells(spells, level).map((spell: Spell) => (

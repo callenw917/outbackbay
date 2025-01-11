@@ -1,5 +1,6 @@
 import { Divider, Title } from '@mantine/core';
 import styles from './SpellGroupNarrow.module.css';
+import React from 'react';
 
 type SpellGroupNarrowProps = {
   children: React.ReactNode;
@@ -7,8 +8,11 @@ type SpellGroupNarrowProps = {
 };
 
 export function SpellGroupNarrow(props: SpellGroupNarrowProps) {
+  const childrenArray = React.Children.toArray(props.children);
+  const containerClass = childrenArray.length > 10 ? styles.spellGroupWide : styles.spellGroup;
+
   return (
-    <div className={styles.spellGroup}>
+    <div className={containerClass}>
       <Title order={2} className={styles.title}>
         {props.spellLevel}
       </Title>
