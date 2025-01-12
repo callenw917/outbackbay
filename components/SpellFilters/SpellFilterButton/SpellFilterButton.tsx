@@ -4,7 +4,7 @@ import styles from './SpellFilterButton.module.css';
 
 type SpellFilterButtonProps = {
   children: React.ReactNode;
-  value: string;
+  isSelected: boolean;
   tooltip: string;
   color: string;
   variant: string;
@@ -14,7 +14,7 @@ type SpellFilterButtonProps = {
 
 export default function SpellFilterButton({
   children,
-  value,
+  isSelected,
   tooltip,
   color,
   variant,
@@ -29,7 +29,7 @@ export default function SpellFilterButton({
     <Tooltip label={tooltip} refProp="rootRef">
       <Chip
         icon={<IconBrain />}
-        value={value}
+        checked={isSelected}
         color={color}
         variant={variant}
         classNames={styles}

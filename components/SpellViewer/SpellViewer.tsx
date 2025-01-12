@@ -10,7 +10,7 @@ import {
   SpellLevel,
   spellLevelEnum,
   supportedSpellLevels,
-} from '@/shared/lib/Spell';
+} from '@/shared/lib/spell';
 import { useContext, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
 import { SpellCardModal } from '@/components/SpellCardModal/SpellCardModal';
@@ -125,7 +125,9 @@ function getFilteredSpells(spells: Spell[], filters: FilterStateObject): Spell[]
   }
 
   for (const spell of spells) {
+    // Filter for Class
     if (spell.classes?.includes(filters.selectedClass)) {
+      // Filter for Concentration/Ritual
       if (filters.showRituals || filters.showConcentration) {
         if (filters.showRituals && !spell.isRitual) {
           if ((filters.showConcentration && !spell.requiresConc) || !filters.showConcentration) {
@@ -135,7 +137,17 @@ function getFilteredSpells(spells: Spell[], filters: FilterStateObject): Spell[]
           continue;
         }
       }
-      // If the user has selected a specific level, only show spells of that level
+      // Filter for Components
+      if (!filters.showVerbal && spell.verbal) {
+        continue;
+      }
+      if (!filters.showSomatic && spell.somatic) {
+        continue;
+      }
+      if (!filters.showMaterial && spell.material) {
+        continue;
+      }
+      // Filter for Action Cost
       if (filters.showActions || filters.showBonusActions || filters.showReactions) {
         if (filters.showActions && spell.castTime?.isAction()) {
           filteredSpells.push(spell);

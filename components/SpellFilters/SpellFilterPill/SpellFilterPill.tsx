@@ -3,7 +3,16 @@
 import { CardViewSelector } from '../CardViewSelector/CardViewSelector';
 import { SpellLevelSelector } from '../SpellLevelSelector/SpellLevelSelector';
 import styles from './SpellFilterPill.module.css';
-import { IconBrain, IconCandle, IconLetterA, IconLetterB, IconLetterR } from '@tabler/icons-react';
+import {
+  IconBrain,
+  IconCandle,
+  IconLetterA,
+  IconLetterB,
+  IconLetterM,
+  IconLetterR,
+  IconLetterS,
+  IconLetterV,
+} from '@tabler/icons-react';
 import SpellFilterButton from '../SpellFilterButton/SpellFilterButton';
 import { useContext } from 'react';
 import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
@@ -25,7 +34,7 @@ export default function SpellFilterPill() {
           variant="filled"
           spellFilteringType="setShowConcentration"
           setSpellFiltering={setSpellFiltering}
-          value={spellFiltering.showConcentration.toString()}
+          isSelected={spellFiltering.showConcentration}
           tooltip="Concentration"
         >
           <IconBrain />
@@ -35,10 +44,44 @@ export default function SpellFilterPill() {
           variant="filled"
           spellFilteringType="setShowRituals"
           setSpellFiltering={setSpellFiltering}
-          value={spellFiltering.showRituals.toString()}
+          isSelected={spellFiltering.showRituals}
           tooltip="Ritual"
         >
           <IconCandle />
+        </SpellFilterButton>
+
+        <Divider size="sm" orientation="vertical" />
+
+        {/* Spell Component Filtering. All on by default, turn off to filter */}
+        <SpellFilterButton
+          color="grey"
+          variant="light"
+          spellFilteringType="setShowVerbal"
+          setSpellFiltering={setSpellFiltering}
+          isSelected={spellFiltering.showVerbal}
+          tooltip="Verbal"
+        >
+          <IconLetterV />
+        </SpellFilterButton>
+        <SpellFilterButton
+          color="grey"
+          variant="light"
+          spellFilteringType="setShowSomatic"
+          setSpellFiltering={setSpellFiltering}
+          isSelected={spellFiltering.showSomatic}
+          tooltip="Somatic"
+        >
+          <IconLetterS />
+        </SpellFilterButton>
+        <SpellFilterButton
+          color="grey"
+          variant="light"
+          spellFilteringType="setShowMaterial"
+          setSpellFiltering={setSpellFiltering}
+          isSelected={spellFiltering.showMaterial}
+          tooltip="Material"
+        >
+          <IconLetterM />
         </SpellFilterButton>
 
         <Divider size="sm" orientation="vertical" />
@@ -48,7 +91,7 @@ export default function SpellFilterPill() {
           variant="filled"
           spellFilteringType="setShowActions"
           setSpellFiltering={setSpellFiltering}
-          value={spellFiltering.showActions.toString()}
+          isSelected={spellFiltering.showActions}
           tooltip="Action"
         >
           <IconLetterA />
@@ -58,7 +101,7 @@ export default function SpellFilterPill() {
           variant="filled"
           spellFilteringType="setShowBonusActions"
           setSpellFiltering={setSpellFiltering}
-          value={spellFiltering.showBonusActions.toString()}
+          isSelected={spellFiltering.showBonusActions}
           tooltip="Bonus Action"
         >
           <IconLetterB />
@@ -68,7 +111,7 @@ export default function SpellFilterPill() {
           variant="filled"
           spellFilteringType="setShowReactions"
           setSpellFiltering={setSpellFiltering}
-          value={spellFiltering.showReactions.toString()}
+          isSelected={spellFiltering.showReactions}
           tooltip="Reaction"
         >
           <IconLetterR />
