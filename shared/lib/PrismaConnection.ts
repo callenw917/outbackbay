@@ -1,9 +1,10 @@
 import prisma from '@/lib/prisma';
+import { Spell } from '@prisma/client';
 
 /**
  * Returns all spells given a character's id
  * @param characterId
- * @returns {Promise<Spell[]>} Spells for the character
+ * @returns {Promise<CharacterSpell[]>} Spells for the character
  */
 export async function getSpellsForCharacter(characterId: number) {
   const characterWithSpells = await prisma.character.findUnique({
@@ -21,7 +22,9 @@ export async function getSpellsForCharacter(characterId: number) {
     throw new Error(`Character with id ${characterId} not found`);
   }
 
-  return characterWithSpells.spells.map((cs: any) => cs.spell);
+  const plainCharacterWithSpells = JSON.parse(JSON.stringify(characterWithSpells));
+
+  return plainCharacterWithSpells.spells;
 }
 
 /**

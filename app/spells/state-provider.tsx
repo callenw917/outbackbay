@@ -1,6 +1,6 @@
 'use client';
 
-import { cardViews, playerClass, spellLevelEnum, supportedSpellLevels } from '@/shared/lib/spell';
+import { cardViews, playerClass, spellLevelEnum, supportedSpellLevels } from '@/shared/lib/Spell';
 import { createContext, useReducer } from 'react';
 
 /***************************************************** */
@@ -18,6 +18,7 @@ export interface FilterStateObject {
   showVerbal: boolean;
   showSomatic: boolean;
   showMaterial: boolean;
+  showKnownSpells: boolean;
 }
 
 const initialFilterState: FilterStateObject = {
@@ -32,6 +33,7 @@ const initialFilterState: FilterStateObject = {
   showVerbal: true,
   showSomatic: true,
   showMaterial: true,
+  showKnownSpells: false,
 };
 
 export const SpellFilterContext = createContext({
@@ -95,6 +97,11 @@ function spellFilterReducer(state: FilterStateObject, action: any): FilterStateO
       return {
         ...state,
         showMaterial: action.value,
+      };
+    case 'setShowKnownSpells':
+      return {
+        ...state,
+        showKnownSpells: action.value,
       };
     default:
       return state;

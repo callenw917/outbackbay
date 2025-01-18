@@ -5,11 +5,12 @@ import { SpellCardSmall } from '@/components/SpellCard/Small/SpellCardSmall';
 import { SpellGroupNarrow } from '@/components/SpellGroup/SpellGroupNarrow';
 import {
   Spell,
-  buildSpellObjects,
   cardViews,
   SpellLevel,
   spellLevelEnum,
   supportedSpellLevels,
+  buildSpellObjects,
+  buildSpellObject,
 } from '@/shared/lib/Spell';
 import { useContext, useState } from 'react';
 import { InactiveArea } from '@/components/InactiveArea/InactiveArea';
@@ -22,15 +23,19 @@ import {
   SpellSearchStateObject,
 } from '@/app/spells/state-provider';
 import React from 'react';
+import { CharacterSpell } from '@/shared/lib/Character';
+import build from 'next/dist/build';
 //#endregion
 
 type spellViewerProps = {
-  spells: Spell[];
+  spells: CharacterSpell[];
 };
 
 var spellToOpen: Spell;
 
 export default function SpellViewer({ spells }: spellViewerProps) {
+  console.log(spells);
+
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
     spellFiltering: FilterStateObject;
@@ -51,19 +56,22 @@ export default function SpellViewer({ spells }: spellViewerProps) {
     spellToOpen = selectedSpell;
   }
 
-  if (spellSearch.searchTerm != '') {
-    spells = spells.filter((spell) =>
-      spell.name.toLowerCase().includes(spellSearch.searchTerm.toLowerCase())
-    );
-  }
+  spells = spells.map((cs: any) => {
+    return new CharacterSpell(buildSpellObject(cs.spell), cs.prepared);
+  });
 
-  spells = buildSpellObjects(spells);
-  spells = getFilteredSpells(spells, spellFiltering);
+  // if (spellSearch.searchTerm != '') {
+  //   spells = spells.filter((spell) =>
+  //     spell.name.toLowerCase().includes(spellSearch.searchTerm.toLowerCase())
+  //   );
+  // }
+
+  const filteredSpells = getFilteredSpells(spells, spellFiltering);
 
   // Only display the spell groups that have spells in them
   const spellGroupsToDisplay = new Set<SpellLevel>();
   const addedSpellLevels = new Set<number>();
-  spells.forEach((spell) => {
+  filteredSpells.forEach((spell) => {
     if (!addedSpellLevels.has(spell.level.level)) {
       spellGroupsToDisplay.add(spell.level);
       addedSpellLevels.add(spell.level.level);
@@ -81,7 +89,7 @@ export default function SpellViewer({ spells }: spellViewerProps) {
             addedSpellLevels.has(level.level) &&
             level.level != -1 && (
               <SpellGroupNarrow spellLevel={level.toString()} key={level.toString()}>
-                {getSortedSpells(spells, level).map((spell: Spell) => (
+                {getSortedSpells(filteredSpells, level).map((spell: Spell) => (
                   <>
                     {spellFiltering.selectedView == cardViews.smallCard && (
                       <SpellCardSmall
@@ -113,23 +121,25 @@ export default function SpellViewer({ spells }: spellViewerProps) {
   );
 }
 
-function getFilteredSpells(spells: Spell[], filters: FilterStateObject): Spell[] {
+function getFilteredSpells(characterSpells: CharacterSpell[], filters: FilterStateObject): Spell[] {
   var filteredSpells: Spell[] = [];
 
-  if (!spells) {
+  if (!characterSpells) {
     return filteredSpells;
   }
 
-  for (const spell of spells) {
+  for (const characterSpell of characterSpells) {
+    const spell = characterSpell.spell;
+
     // Filter for Class
     if (!spell.classes?.includes(filters.selectedClass)) {
       continue;
     }
 
     // Filter for known/prepared spells
-    // if (!filters.showKnownSpells && !character.hasPrepared(spell)) {
-    //   continue;
-    // }
+    if (!filters.showKnownSpells && !characterSpell.prepared) {
+      continue;
+    }
 
     // Filter for Concentration/Ritual
     if (filters.showRituals || filters.showConcentration) {
