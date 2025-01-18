@@ -1,5 +1,5 @@
 import { Button, Menu, Tooltip, rem } from '@mantine/core';
-import { IconPlus, IconSearch } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-react';
 import { useState } from 'react';
 
 export default function SpellContextMenu() {

@@ -6,3 +6,11 @@
 .root {
   overflow: hidden;
 }
+
+.prepared {
+  background-color: white;
+}
+
+.known {
+  background-color: #ebeaea;
+}

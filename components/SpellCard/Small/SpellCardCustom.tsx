@@ -1,4 +1,4 @@
-import { Badge, Paper, Text, Title } from '@mantine/core';
+import { Paper, Text, Title } from '@mantine/core';
 import classes from './SpellCard.module.css';
 
 type SpellCardProps = {

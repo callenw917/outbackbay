@@ -1,5 +1,5 @@
 import { Spell } from '@/shared/lib/Spell';
-import { Modal, Button } from '@mantine/core';
+import { Modal } from '@mantine/core';
 
 type detailedViewType = {
   spell?: Spell;

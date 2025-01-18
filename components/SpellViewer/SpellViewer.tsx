@@ -88,6 +88,7 @@ export default function SpellViewer({ spells }: spellViewerProps) {
                         key={spell.id}
                         spell={spell as Spell}
                         onClick={openDetailedViewHandler}
+                        prepared={false}
                       />
                     )}
                     {spellFiltering.selectedView == cardViews.largeCard && (
@@ -125,11 +126,6 @@ function getFilteredSpells(spells: Spell[], filters: FilterStateObject): Spell[]
     if (!spell.classes?.includes(filters.selectedClass)) {
       continue;
     }
-
-    // Filter for known/prepared spells
-    // if (!filters.showKnownSpells && !character.hasPrepared(spell)) {
-    //   continue;
-    // }
 
     // Filter for Concentration/Ritual
     if (filters.showRituals || filters.showConcentration) {

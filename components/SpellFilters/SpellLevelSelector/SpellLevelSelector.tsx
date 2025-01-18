@@ -2,7 +2,7 @@
 
 import { Group, SegmentedControl } from '@mantine/core';
 import classes from './SpellLevelSelector.module.css';
-import { supportedSpellLevels, SpellLevel } from '@/shared/lib/Spell';
+import { supportedSpellLevels } from '@/shared/lib/Spell';
 import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
 import { useContext } from 'react';
 

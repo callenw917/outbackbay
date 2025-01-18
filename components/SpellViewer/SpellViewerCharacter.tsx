@@ -60,13 +60,26 @@ export default function SpellViewer({ spells }: spellViewerProps) {
     return new CharacterSpell(buildSpellObject(cs.spell), cs.prepared);
   });
 
-  // if (spellSearch.searchTerm != '') {
-  //   spells = spells.filter((spell) =>
-  //     spell.name.toLowerCase().includes(spellSearch.searchTerm.toLowerCase())
-  //   );
-  // }
+  var preparedDictionary = new Map<string, boolean>();
+  var filteredSpells = getFilteredSpells(spells, spellFiltering, preparedDictionary);
 
-  const filteredSpells = getFilteredSpells(spells, spellFiltering);
+  if (spellSearch.searchTerm != '') {
+    filteredSpells = filteredSpells.filter((spell) =>
+      spell.name.toLowerCase().includes(spellSearch.searchTerm.toLowerCase())
+    );
+  }
+
+  // Custom sorting function
+  const sortSpellsByPreparedStatus = (
+    spells: Spell[],
+    preparedDictionary: Map<string, boolean>
+  ) => {
+    return spells.sort((a, b) => {
+      const aPrepared = preparedDictionary.get(a.id) ? 1 : 0;
+      const bPrepared = preparedDictionary.get(b.id) ? 1 : 0;
+      return bPrepared - aPrepared; // Sort prepared spells first
+    });
+  };
 
   // Only display the spell groups that have spells in them
   const spellGroupsToDisplay = new Set<SpellLevel>();
@@ -77,6 +90,8 @@ export default function SpellViewer({ spells }: spellViewerProps) {
       addedSpellLevels.add(spell.level.level);
     }
   });
+
+  const sortedFilteredSpells = sortSpellsByPreparedStatus(filteredSpells, preparedDictionary);
 
   return (
     <>
@@ -89,12 +104,13 @@ export default function SpellViewer({ spells }: spellViewerProps) {
             addedSpellLevels.has(level.level) &&
             level.level != -1 && (
               <SpellGroupNarrow spellLevel={level.toString()} key={level.toString()}>
-                {getSortedSpells(filteredSpells, level).map((spell: Spell) => (
+                {getSortedSpells(sortedFilteredSpells, level).map((spell: Spell) => (
                   <>
                     {spellFiltering.selectedView == cardViews.smallCard && (
                       <SpellCardSmall
                         key={spell.id}
                         spell={spell as Spell}
+                        prepared={preparedDictionary.get(spell.id) as boolean}
                         onClick={openDetailedViewHandler}
                       />
                     )}
@@ -121,7 +137,11 @@ export default function SpellViewer({ spells }: spellViewerProps) {
   );
 }
 
-function getFilteredSpells(characterSpells: CharacterSpell[], filters: FilterStateObject): Spell[] {
+function getFilteredSpells(
+  characterSpells: CharacterSpell[],
+  filters: FilterStateObject,
+  preparedDictionary: Map<string, boolean>
+): Spell[] {
   var filteredSpells: Spell[] = [];
 
   if (!characterSpells) {
@@ -140,6 +160,8 @@ function getFilteredSpells(characterSpells: CharacterSpell[], filters: FilterSta
     if (!filters.showKnownSpells && !characterSpell.prepared) {
       continue;
     }
+
+    preparedDictionary.set(spell.id, characterSpell.prepared);
 
     // Filter for Concentration/Ritual
     if (filters.showRituals || filters.showConcentration) {
