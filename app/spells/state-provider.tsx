@@ -1,6 +1,11 @@
 'use client';
 
-import { cardViews, playerClass, spellLevelEnum, supportedSpellLevels } from '@/shared/lib/Spell';
+import {
+  cardViews,
+  playerClass,
+  spellLevelEnum,
+  supportedSpellLevels,
+} from '../../shared/lib/Spell';
 import { createContext, useReducer } from 'react';
 
 /***************************************************** */
