@@ -11,10 +11,10 @@ type SpellCardProps = {
 
 export function SpellCardLarge(props: SpellCardProps) {
   var spell: Spell = props.spell;
-  var spellComponents = spell.components;
-  if (spellComponents) {
-    spellComponents = spellComponents.replace(/[()]/g, '');
-    spellComponents = spellComponents.charAt(0).toUpperCase() + spellComponents.slice(1);
+  var materialCost = spell.material_cost;
+  if (materialCost) {
+    materialCost = materialCost.replace(/[()]/g, '');
+    materialCost = materialCost.charAt(0).toUpperCase() + materialCost.slice(1);
   }
 
   return (
@@ -68,9 +68,9 @@ export function SpellCardLarge(props: SpellCardProps) {
               {spell.getComponents()}
             </Text>
           </HoverCard.Target>
-          {spellComponents && (
+          {materialCost && (
             <HoverCard.Dropdown>
-              <Text>{spellComponents}</Text>
+              <Text>{materialCost}</Text>
             </HoverCard.Dropdown>
           )}
         </HoverCard>

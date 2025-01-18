@@ -62,7 +62,7 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
   const handleCharacterSelect = (value: string | null) => {
     if (!value) return;
     const characterId = value.split('[')[1].split(']')[0];
-    router.push(`/spells/character/${characterId}`);
+    router.push(`spells/character/${characterId}`);
   };
 
   const characterNames = characters.map(

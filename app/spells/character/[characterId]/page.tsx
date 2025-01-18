@@ -1,8 +1,8 @@
 import SpellFilterPill from '@/components/SpellFilters/SpellFilterPill/SpellFilterPill';
-import SpellFilterTray from '@/components/SpellFilters/SpellFilterTray/SpellFilterTray';
-import SpellViewer from '@/components/SpellViewer/SpellViewer';
+import SpellViewerCharacter from '@/components/SpellViewer/SpellViewerCharacter';
+import { CharacterSpell } from '@/shared/lib/Character';
 import { getSpellsForCharacter } from '@/shared/lib/PrismaConnection';
-import { Group } from '@mantine/core';
+import { buildSpellObject } from '@/shared/lib/Spell';
 import { redirect } from 'next/navigation';
 
 export default async function SpellPage({ params }: { params: { characterId: string } }) {
@@ -15,13 +15,13 @@ export default async function SpellPage({ params }: { params: { characterId: str
     redirect('/spells');
   }
 
-  const rawSpells = await getSpellsForCharacter(parseInt(characterId, 10));
+  const rawCharacterSpells = await getSpellsForCharacter(parseInt(characterId, 10));
 
   return (
     <>
       <div className="mainArea">
         <SpellFilterPill></SpellFilterPill>
-        <SpellViewer rawSpells={rawSpells}></SpellViewer>
+        <SpellViewerCharacter spells={rawCharacterSpells}></SpellViewerCharacter>
       </div>
     </>
   );

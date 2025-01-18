@@ -1,6 +1,7 @@
 import SpellFilterPill from '@/components/SpellFilters/SpellFilterPill/SpellFilterPill';
 import SpellFilterTray from '@/components/SpellFilters/SpellFilterTray/SpellFilterTray';
 import SpellViewer from '@/components/SpellViewer/SpellViewer';
+import { buildSpellObjects } from '@/shared/lib/Spell';
 import { Group } from '@mantine/core';
 
 async function getSpells() {
@@ -14,13 +15,13 @@ async function getSpells() {
 }
 
 export default async function SpellPage() {
-  const rawSpells = await getSpells();
+  const spells = await getSpells();
 
   return (
     <>
       <div className="mainArea">
         <SpellFilterPill></SpellFilterPill>
-        <SpellViewer rawSpells={rawSpells}></SpellViewer>
+        <SpellViewer spells={spells}></SpellViewer>
       </div>
     </>
   );

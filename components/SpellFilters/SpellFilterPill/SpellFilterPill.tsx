@@ -17,6 +17,8 @@ import SpellFilterButton from '../SpellFilterButton/SpellFilterButton';
 import { useContext } from 'react';
 import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provider';
 import { Divider } from '@mantine/core';
+import { ClassSelectDropdown } from '../ClassSelectDropdown/ClassSelectDropdown';
+import SpellFilterSwitch from '../SpellFilterSwitch/SpellFilterSwitch';
 
 export default function SpellFilterPill() {
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
@@ -28,7 +30,17 @@ export default function SpellFilterPill() {
     <div className={styles.container}>
       <SpellLevelSelector visibleFrom="" />
       <CardViewSelector />
+      <ClassSelectDropdown />
       <div className={styles.filterButtons}>
+        <SpellFilterSwitch
+          spellFilteringType="setShowKnownSpells"
+          setSpellFiltering={setSpellFiltering}
+          tooltip="Include Known Spells"
+          label="Known Spells"
+          isSelected={spellFiltering.showKnownSpells}
+        />
+        <Divider size="sm" orientation="vertical" />
+
         <SpellFilterButton
           color="yellow"
           variant="filled"

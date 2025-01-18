@@ -28,12 +28,12 @@ export class Spell {
   target?: target;
   castTime?: SpellTime;
   range?: SpellRange;
-  components?: string;
   duration?: SpellTime;
   damageType?: string;
   verbal: boolean;
   somatic: boolean;
   material: boolean;
+  material_cost: string;
 
   /**
    * Creates a new instance of the Spell class.
@@ -52,7 +52,6 @@ export class Spell {
    * @param isConcentration Indicates if the spell requires concentration.
    * @param source The source of the spell.
    * @param range The range of the spell.
-   * @param components The components required to cast the spell.
    * @param duration The duration of the spell.
    * @param damageType The type of damage the spell deals.
    */
@@ -65,6 +64,7 @@ export class Spell {
     verbal: boolean,
     somatic: boolean,
     material: boolean,
+    material_cost: string,
     school?: string,
     target?: target,
     castTime?: SpellTime,
@@ -72,7 +72,6 @@ export class Spell {
     isConcentration?: boolean,
     source?: string,
     range?: SpellRange,
-    components?: string,
     duration?: SpellTime,
     damageType?: string
   ) {
@@ -88,12 +87,12 @@ export class Spell {
     this.requiresConc = isConcentration;
     this.source = source;
     this.range = range;
-    this.components = components;
     this.duration = duration;
     this.damageType = damageType;
     this.verbal = verbal;
     this.somatic = somatic;
     this.material = material;
+    this.material_cost = material_cost;
   }
 
   /**
@@ -110,6 +109,9 @@ export class Spell {
     }
     if (this.material) {
       components = components + ' M';
+    }
+    if (this.material_cost) {
+      components = components + ' ' + this.material_cost;
     }
     return components;
   }
@@ -141,51 +143,53 @@ export class Spell {
 export function buildSpellObjects(rawSpells: any): Spell[] {
   var spells: Spell[] = [];
   rawSpells.forEach((rawSpell: any) => {
-    var classArray: string[] = buildClassArray(rawSpell);
-    var castTime: SpellTime | undefined = undefined;
-    if (rawSpell.casting_time_amount && rawSpell.casting_time_unit) {
-      castTime = new SpellTime(
-        rawSpell.casting_time_amount,
-        spellTimeMap.get(rawSpell.casting_time_unit) || timeUnit.special
-      );
-    }
-    var spellRange: SpellRange | undefined = undefined;
-    if (rawSpell.range_amount && rawSpell.range_unit) {
-      spellRange = new SpellRange(
-        rawSpell.range_amount,
-        rangeUnitMap.get(rawSpell.range_unit) || rangeUnit.feet
-      );
-    }
-    var spellDuration: SpellTime | undefined = undefined;
-    if (rawSpell.duration_amount && rawSpell.duration_unit) {
-      spellDuration = new SpellTime(
-        rawSpell.duration_amount,
-        spellTimeMap.get(rawSpell.duration_unit) || timeUnit.special
-      );
-    }
-    spells.push(
-      new Spell(
-        rawSpell.id,
-        rawSpell.name,
-        rawSpell.details,
-        rawSpell.level,
-        classArray,
-        rawSpell.verbal,
-        rawSpell.somatic,
-        rawSpell.material,
-        '',
-        undefined,
-        castTime,
-        rawSpell.ritual,
-        rawSpell.concentration,
-        '',
-        spellRange,
-        rawSpell.material_object,
-        spellDuration
-      )
-    );
+    spells.push(buildSpellObject(rawSpell));
   });
   return spells;
+}
+
+export function buildSpellObject(rawSpell: any): Spell {
+  var classArray: string[] = buildClassArray(rawSpell);
+  var castTime: SpellTime | undefined = undefined;
+  if (rawSpell.casting_time_amount && rawSpell.casting_time_unit) {
+    castTime = new SpellTime(
+      rawSpell.casting_time_amount,
+      spellTimeMap.get(rawSpell.casting_time_unit) || timeUnit.special
+    );
+  }
+  var spellRange: SpellRange | undefined = undefined;
+  if (rawSpell.range_amount && rawSpell.range_unit) {
+    spellRange = new SpellRange(
+      rawSpell.range_amount,
+      rangeUnitMap.get(rawSpell.range_unit) || rangeUnit.feet
+    );
+  }
+  var spellDuration: SpellTime | undefined = undefined;
+  if (rawSpell.duration_amount && rawSpell.duration_unit) {
+    spellDuration = new SpellTime(
+      rawSpell.duration_amount,
+      spellTimeMap.get(rawSpell.duration_unit) || timeUnit.special
+    );
+  }
+  return new Spell(
+    rawSpell.id,
+    rawSpell.name,
+    rawSpell.details,
+    rawSpell.level,
+    classArray,
+    rawSpell.verbal,
+    rawSpell.somatic,
+    rawSpell.material,
+    rawSpell.material_object,
+    '',
+    undefined,
+    castTime,
+    rawSpell.ritual,
+    rawSpell.concentration,
+    '',
+    spellRange,
+    spellDuration
+  );
 }
 
 /**
@@ -280,6 +284,10 @@ export class SpellTime {
     return !this.shouldSkipAmount
       ? this.amount.toString() + ' ' + printTimeUnit(this.unit, true, true)
       : printTimeUnit(this.unit, true, true);
+  }
+
+  toStringLong(): string {
+    return this.amount.toString() + ' ' + printTimeUnit(this.unit, false, this.plural);
   }
 
   /**
