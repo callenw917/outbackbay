@@ -25,6 +25,8 @@ import {
 import React from 'react';
 import { CharacterSpell } from '@/shared/lib/Character';
 import build from 'next/dist/build';
+import { SessionProvider } from 'next-auth/react';
+import { handleSpellSave } from '@/shared/lib/PrismaConnection';
 //#endregion
 
 type spellViewerProps = {
@@ -33,9 +35,12 @@ type spellViewerProps = {
 
 var spellToOpen: Spell;
 
-export default function SpellViewer({ spells }: spellViewerProps) {
-  console.log(spells);
-
+export default function SpellViewer({ spells: initialSpells }: spellViewerProps) {
+  const [spells, setSpells] = useState(
+    initialSpells.map((cs: any) => {
+      return new CharacterSpell(buildSpellObject(cs.spell), cs.prepared);
+    })
+  );
   const [detailedCardVisible, setDetailedCardVisible] = useState(false);
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
     spellFiltering: FilterStateObject;
@@ -56,9 +61,24 @@ export default function SpellViewer({ spells }: spellViewerProps) {
     spellToOpen = selectedSpell;
   }
 
-  spells = spells.map((cs: any) => {
-    return new CharacterSpell(buildSpellObject(cs.spell), cs.prepared);
-  });
+  const handleSpellUpdate = async (updatedSpell: Spell) => {
+    try {
+      await handleSpellSave(updatedSpell);
+
+      // Update the local state with the new spell data
+      setSpells((prevSpells) =>
+        prevSpells.map((cs) => {
+          if (cs.spell.id === updatedSpell.id) {
+            return new CharacterSpell(updatedSpell, cs.prepared);
+          }
+          return cs;
+        })
+      );
+    } catch (error) {
+      console.error('Error updating spell:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
 
   var preparedDictionary = new Map<string, boolean>();
   var filteredSpells = getFilteredSpells(spells, spellFiltering, preparedDictionary);
@@ -127,11 +147,14 @@ export default function SpellViewer({ spells }: spellViewerProps) {
             )
         )}
       </div>
-      <SpellCardModal
-        spell={spellToOpen}
-        opened={detailedCardVisible}
-        close={closeDetailedViewHandler}
-      ></SpellCardModal>
+      <SessionProvider>
+        <SpellCardModal
+          spell={spellToOpen}
+          opened={detailedCardVisible}
+          close={closeDetailedViewHandler}
+          onSave={handleSpellUpdate}
+        ></SpellCardModal>
+      </SessionProvider>
       {detailedCardVisible && <InactiveArea onClick={closeDetailedViewHandler} />}
     </>
   );

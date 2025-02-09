@@ -22,6 +22,8 @@ import {
   SpellSearchStateObject,
 } from '@/app/spells/state-provider';
 import React from 'react';
+import { SessionProvider } from 'next-auth/react';
+import { handleSpellSave } from '@/shared/lib/PrismaConnection';
 //#endregion
 
 type spellViewerProps = {
@@ -104,11 +106,14 @@ export default function SpellViewer({ spells }: spellViewerProps) {
             )
         )}
       </div>
-      <SpellCardModal
-        spell={spellToOpen}
-        opened={detailedCardVisible}
-        close={closeDetailedViewHandler}
-      ></SpellCardModal>
+      <SessionProvider>
+        <SpellCardModal
+          spell={spellToOpen}
+          opened={detailedCardVisible}
+          close={closeDetailedViewHandler}
+          onSave={handleSpellSave}
+        ></SpellCardModal>
+      </SessionProvider>
       {detailedCardVisible && <InactiveArea onClick={closeDetailedViewHandler} />}
     </>
   );

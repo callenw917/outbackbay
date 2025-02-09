@@ -95,6 +95,28 @@ export class Spell {
     this.material_cost = material_cost;
   }
 
+  static cloneSpell(spell: Spell): Spell {
+    return new Spell(
+      spell.id,
+      spell.name,
+      spell.description,
+      spell.level.level,
+      spell.classes,
+      spell.verbal,
+      spell.somatic,
+      spell.material,
+      spell.material_cost,
+      spell.school,
+      spell.target,
+      spell.castTime,
+      spell.isRitual,
+      spell.requiresConc,
+      spell.source,
+      spell.range,
+      spell.duration
+    );
+  }
+
   /**
    * Gets the components required to cast the spell.
    * @returns The components required to cast the spell.

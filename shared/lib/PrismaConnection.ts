@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import { Spell } from '@prisma/client';
+import { Spell } from '@/shared/lib/Spell';
 
 /**
  * Returns all spells given a character's id
@@ -94,4 +94,30 @@ export async function updateSpellList(characterId: number, spellIds: number[]) {
   await prisma.characterSpells.createMany({
     data: spellData,
   });
+}
+
+/**
+ * Saves a spell with a given id.
+ * @param updatedSpell - The spell to update
+ * @returns {Promise<void>}
+ */
+export async function handleSpellSave(updatedSpell: Spell) {
+  try {
+    const response = await fetch(`/api/save-spell/${updatedSpell.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedSpell),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update spell');
+    }
+
+    // Handle successful update
+  } catch (error) {
+    console.error('Error updating spell:', error);
+    // Handle error
+  }
 }
