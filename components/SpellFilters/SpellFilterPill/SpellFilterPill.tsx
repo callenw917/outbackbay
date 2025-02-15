@@ -19,6 +19,7 @@ import { SpellFilterContext, FilterStateObject } from '@/app/spells/state-provid
 import { Divider } from '@mantine/core';
 import { ClassSelectDropdown } from '../ClassSelectDropdown/ClassSelectDropdown';
 import SpellFilterSwitch from '../SpellFilterSwitch/SpellFilterSwitch';
+import { SpellLevelSelectorSmall } from '../SpellLevelSelector/SpellLevelSelectorSmall';
 
 export default function SpellFilterPill() {
   const { spellFiltering, setSpellFiltering } = useContext(SpellFilterContext) as {
@@ -28,7 +29,7 @@ export default function SpellFilterPill() {
 
   return (
     <div className={styles.container}>
-      <SpellLevelSelector visibleFrom="" />
+      <SpellLevelSelectorSmall hiddenFrom="" />
       <CardViewSelector />
       <ClassSelectDropdown />
       <div className={styles.filterButtons}>

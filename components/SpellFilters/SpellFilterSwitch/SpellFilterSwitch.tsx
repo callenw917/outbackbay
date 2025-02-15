@@ -1,4 +1,5 @@
 import { Switch, Tooltip } from '@mantine/core';
+import styles from './SpellFilterSwitch.module.css';
 
 type SpellFilterSwitchProps = {
   isSelected: boolean;
@@ -24,6 +25,7 @@ export default function SpellFilterSwitch({
         label={label}
         checked={isSelected}
         onChange={(event) => stateChangedHandler(event.currentTarget.checked)}
+        classNames={styles}
       />
     </Tooltip>
   );

@@ -1,9 +1,10 @@
 import SpellFilterPill from '@/components/SpellFilters/SpellFilterPill/SpellFilterPill';
 import SpellViewerCharacter from '@/components/SpellViewer/SpellViewerCharacter';
-import { CharacterSpell } from '@/shared/lib/Character';
 import { getSpellsForCharacter } from '@/shared/lib/PrismaConnection';
-import { buildSpellObject } from '@/shared/lib/Spell';
 import { redirect } from 'next/navigation';
+
+export const dynamic = 'force-dynamic'; // Make sure getSpellsForCharacter will not grab cached data
+export const fetchCache = 'force-no-store';
 
 export default async function SpellPage({ params }: { params: { characterId: string } }) {
   const characterId = Array.isArray(params.characterId)
@@ -11,7 +12,6 @@ export default async function SpellPage({ params }: { params: { characterId: str
     : params.characterId;
 
   if (!characterId) {
-    // Redirect back to /spells
     redirect('/spells');
   }
 

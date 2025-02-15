@@ -1,13 +1,11 @@
-import { ActionIcon, Autocomplete, Burger, Group, rem } from '@mantine/core';
-import { IconPlus, IconSearch } from '@tabler/icons-react';
-import React, { useEffect, useRef } from 'react';
+import { Group } from '@mantine/core';
+import React from 'react';
 import classes from './Header.module.css';
 import { SignIn } from '../UserManagement/SignIn';
 import { SignOut } from '../UserManagement/SignOut';
 import UserMenu from '../UserManagement/UserMenu';
 import { auth } from '@/auth';
 import CharacterSelector from '../Characters/CharacterSelector/CharacterSelector';
-import { Character } from '@/shared/lib/Character';
 import SpellSearch from '../SpellSearch/SpellSearch';
 
 export default async function Header() {

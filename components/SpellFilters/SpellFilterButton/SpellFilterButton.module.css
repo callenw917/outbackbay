@@ -1,9 +1,18 @@
 .root {
-  --chip-size: 40px;
+  --chip-size: 30px;
   --chip-icon-size: 0px;
-  --chip-checked-padding: 8px !important;
-  --chip-padding: 8px !important;
-  --chip-radius: 10px !important;
+  --chip-checked-padding: 5px !important;
+  --chip-padding: 5px !important;
+  --chip-radius: 6px !important;
+}
+
+.root svg {
+  height: 20px;
+  width: 20px;
+}
+
+.root label span {
+  display: none;
 }
 
 .iconWrapper {

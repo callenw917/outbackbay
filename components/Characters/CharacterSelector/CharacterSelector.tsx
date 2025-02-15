@@ -4,7 +4,7 @@ import { ActionIcon, Button, Group, Modal, NumberInput, Select, TextInput } from
 import { useForm } from '@mantine/form';
 import { IconPlus, IconTrash } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { createCharacter } from '@/app/actions';
 import { Character } from '@/shared/lib/Character';
 
@@ -16,6 +16,10 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [characters, setCharacters] = useState<Character[]>([]);
   const router = useRouter();
+  const params = useParams();
+  const activeCharacterId = Array.isArray(params?.characterId)
+    ? params.characterId[0]
+    : params?.characterId;
 
   useEffect(() => {
     if (userId) {
@@ -62,7 +66,8 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
   const handleCharacterSelect = (value: string | null) => {
     if (!value) return;
     const characterId = value.split('[')[1].split(']')[0];
-    router.push(`spells/character/${characterId}`);
+    if (characterId === activeCharacterId) return;
+    router.push(`/spells/character/${characterId}`);
   };
 
   const characterNames = characters.map(
@@ -71,12 +76,19 @@ export default function CharacterSelector({ userId }: CharacterSelectorProps) {
 
   const env = process.env.NODE_ENV;
 
+  const selectedCharacter = characters.find((char) => char.id.toString() === activeCharacterId);
+  const selectedValue = selectedCharacter
+    ? `${selectedCharacter.name} [${selectedCharacter.id}]`
+    : null;
+
   return (
     <>
       <Select
         data={characterNames}
+        allowDeselect={false}
         placeholder="Select Character"
         onChange={handleCharacterSelect}
+        value={selectedValue}
       />
       <ActionIcon variant="subtle" size="lg" onClick={() => setModalOpen(true)}>
         <IconPlus></IconPlus>
